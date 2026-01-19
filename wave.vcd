@@ -1,5 +1,5 @@
 $date
-	Mon Jan 19 15:35:10 2026
+	Mon Jan 19 15:50:10 2026
 $end
 $version
 	Icarus Verilog
@@ -8,98 +8,115 @@ $timescale
 	1ps
 $end
 $scope module tb_processor $end
-$var wire 32 ! instr_data [31:0] $end
-$var wire 64 " instr_addr [63:0] $end
-$var reg 1 # clk $end
-$var reg 1 $ rst $end
-$var integer 32 % i [31:0] $end
+$var wire 64 ! data_mem_rdata [63:0] $end
+$var wire 32 " instr_data [31:0] $end
+$var wire 64 # instr_addr [63:0] $end
+$var wire 1 $ data_mem_we $end
+$var wire 64 % data_mem_wdata [63:0] $end
+$var wire 64 & data_mem_addr [63:0] $end
+$var reg 1 ' clk $end
+$var reg 1 ( rst $end
+$var integer 32 ) i [31:0] $end
 $scope module dut $end
-$var wire 1 # clk $end
-$var wire 64 & data_mem_rdata [63:0] $end
-$var wire 32 ' instr_mem_rdata [31:0] $end
-$var wire 1 $ rst $end
-$var wire 64 ( instr_mem_addr [63:0] $end
-$var wire 1 ) data_mem_we $end
-$var wire 64 * data_mem_wdata [63:0] $end
-$var wire 64 + data_mem_addr [63:0] $end
+$var wire 1 ' clk $end
+$var wire 64 * data_mem_rdata [63:0] $end
+$var wire 32 + instr_mem_rdata [31:0] $end
+$var wire 1 ( rst $end
+$var wire 64 , instr_mem_addr [63:0] $end
+$var wire 1 $ data_mem_we $end
+$var wire 64 - data_mem_wdata [63:0] $end
+$var wire 64 . data_mem_addr [63:0] $end
 $scope module core $end
-$var wire 1 # clk $end
-$var wire 64 , data_mem_rdata [63:0] $end
-$var wire 64 - instr_mem_addr [63:0] $end
-$var wire 32 . instr_mem_rdata [31:0] $end
-$var wire 1 $ rst $end
-$var wire 64 / rs2_data [63:0] $end
-$var wire 5 0 rs2 [4:0] $end
-$var wire 64 1 rs1_data [63:0] $end
-$var wire 5 2 rs1 [4:0] $end
-$var wire 64 3 rd_data [63:0] $end
-$var wire 5 4 rd [4:0] $end
-$var wire 64 5 pc_next [63:0] $end
-$var wire 64 6 pc [63:0] $end
-$var wire 7 7 opcode [6:0] $end
-$var wire 64 8 imm [63:0] $end
-$var wire 7 9 funct7 [6:0] $end
-$var wire 3 : funct3 [2:0] $end
-$var wire 1 ) data_mem_we $end
-$var wire 64 ; data_mem_wdata [63:0] $end
-$var wire 64 < data_mem_addr [63:0] $end
-$var wire 64 = alu_result [63:0] $end
+$var wire 1 ' clk $end
+$var wire 64 / data_mem_rdata [63:0] $end
+$var wire 64 0 instr_mem_addr [63:0] $end
+$var wire 32 1 instr_mem_rdata [31:0] $end
+$var wire 1 ( rst $end
+$var wire 64 2 store_data [63:0] $end
+$var wire 64 3 rs2_data [63:0] $end
+$var wire 5 4 rs2 [4:0] $end
+$var wire 64 5 rs1_data [63:0] $end
+$var wire 5 6 rs1 [4:0] $end
+$var wire 1 7 rd_we $end
+$var wire 64 8 rd_data [63:0] $end
+$var wire 5 9 rd [4:0] $end
+$var wire 64 : pc_next [63:0] $end
+$var wire 64 ; pc [63:0] $end
+$var wire 7 < opcode [6:0] $end
+$var wire 1 = mem_we $end
+$var wire 1 > mem_to_reg $end
+$var wire 64 ? imm_s [63:0] $end
+$var wire 64 @ imm_i [63:0] $end
+$var wire 7 A funct7 [6:0] $end
+$var wire 3 B funct3 [2:0] $end
+$var wire 1 $ data_mem_we $end
+$var wire 64 C data_mem_wdata [63:0] $end
+$var wire 64 D data_mem_addr [63:0] $end
+$var wire 64 E alu_result [63:0] $end
 $scope module ex_stage $end
-$var wire 1 > is_zba $end
-$var wire 64 ? zba_result [63:0] $end
-$var wire 64 @ rs2_data [63:0] $end
-$var wire 64 A rs1_data [63:0] $end
-$var wire 7 B opcode [6:0] $end
-$var wire 64 C imm [63:0] $end
-$var wire 7 D funct7 [6:0] $end
-$var wire 3 E funct3 [2:0] $end
-$var reg 64 F alu_result [63:0] $end
+$var wire 1 F is_zba $end
+$var wire 64 G store_data [63:0] $end
+$var wire 64 H zba_result [63:0] $end
+$var wire 64 I rs2_data [63:0] $end
+$var wire 64 J rs1_data [63:0] $end
+$var wire 7 K opcode [6:0] $end
+$var wire 64 L imm_s [63:0] $end
+$var wire 64 M imm_i [63:0] $end
+$var wire 7 N funct7 [6:0] $end
+$var wire 3 O funct3 [2:0] $end
+$var reg 64 P alu_result [63:0] $end
+$var reg 1 > mem_to_reg $end
+$var reg 1 = mem_we $end
+$var reg 1 7 rd_we $end
 $scope module zba $end
-$var wire 64 G rs2 [63:0] $end
-$var wire 64 H rs1 [63:0] $end
-$var wire 3 I funct3 [2:0] $end
-$var reg 64 J result [63:0] $end
+$var wire 64 Q rs2 [63:0] $end
+$var wire 64 R rs1 [63:0] $end
+$var wire 3 S funct3 [2:0] $end
+$var reg 64 T result [63:0] $end
 $upscope $end
 $upscope $end
 $scope module id_stage $end
-$var wire 32 K instr [31:0] $end
-$var wire 5 L rs2 [4:0] $end
-$var wire 5 M rs1 [4:0] $end
-$var wire 5 N rd [4:0] $end
-$var wire 7 O opcode [6:0] $end
-$var wire 64 P imm [63:0] $end
-$var wire 7 Q funct7 [6:0] $end
-$var wire 3 R funct3 [2:0] $end
+$var wire 32 U instr [31:0] $end
+$var wire 5 V rs2 [4:0] $end
+$var wire 5 W rs1 [4:0] $end
+$var wire 5 X rd [4:0] $end
+$var wire 7 Y opcode [6:0] $end
+$var wire 64 Z imm_s [63:0] $end
+$var wire 64 [ imm_i [63:0] $end
+$var wire 7 \ funct7 [6:0] $end
+$var wire 3 ] funct3 [2:0] $end
 $upscope $end
 $scope module if_stage $end
-$var wire 1 # clk $end
-$var wire 64 S pc_next [63:0] $end
-$var wire 1 $ rst $end
-$var reg 64 T pc [63:0] $end
+$var wire 1 ' clk $end
+$var wire 64 ^ pc_next [63:0] $end
+$var wire 1 ( rst $end
+$var reg 64 _ pc [63:0] $end
 $upscope $end
 $scope module mem_stage_i $end
-$var wire 64 U alu_result [63:0] $end
-$var wire 64 V data_mem_addr [63:0] $end
-$var wire 64 W data_mem_wdata [63:0] $end
-$var wire 1 ) data_mem_we $end
-$var wire 1 X mem_we $end
-$var wire 64 Y rs2_data [63:0] $end
+$var wire 64 ` alu_result [63:0] $end
+$var wire 64 a data_mem_addr [63:0] $end
+$var wire 64 b data_mem_wdata [63:0] $end
+$var wire 1 $ data_mem_we $end
+$var wire 1 = mem_we $end
+$var wire 64 c store_data [63:0] $end
 $upscope $end
 $scope module rf $end
-$var wire 1 # clk $end
-$var wire 5 Z rd [4:0] $end
-$var wire 1 [ rd_we $end
-$var wire 5 \ rs1 [4:0] $end
-$var wire 5 ] rs2 [4:0] $end
-$var wire 64 ^ rs2_data [63:0] $end
-$var wire 64 _ rs1_data [63:0] $end
-$var wire 64 ` rd_data [63:0] $end
+$var wire 1 ' clk $end
+$var wire 5 d rd [4:0] $end
+$var wire 1 7 rd_we $end
+$var wire 5 e rs1 [4:0] $end
+$var wire 5 f rs2 [4:0] $end
+$var wire 1 ( rst $end
+$var wire 64 g rs2_data [63:0] $end
+$var wire 64 h rs1_data [63:0] $end
+$var wire 64 i rd_data [63:0] $end
+$var integer 32 j i [31:0] $end
 $upscope $end
 $scope module wb_stage $end
-$var wire 64 a alu_result [63:0] $end
-$var wire 64 b mem_data [63:0] $end
-$var wire 1 c mem_to_reg $end
-$var wire 64 d rd_data [63:0] $end
+$var wire 64 k alu_result [63:0] $end
+$var wire 64 l mem_data [63:0] $end
+$var wire 1 > mem_to_reg $end
+$var wire 64 m rd_data [63:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -110,687 +127,627 @@ $dumpall
 $end
 #0
 $dumpvars
-b0 d
-0c
-b0 b
+b0 m
+b0 l
+b0 k
+bx j
+b0 i
+bx h
+bx g
+bx f
+bx e
+bx d
+bx c
+bx b
 b0 a
 b0 `
 bx _
 bx ^
 bx ]
 bx \
-1[
+bx [
 bx Z
 bx Y
-0X
+bx X
 bx W
-b0 V
-b0 U
-bx T
+bx V
+bx U
+b0 T
 bx S
 bx R
 bx Q
-bx P
+b0 P
 bx O
 bx N
 bx M
 bx L
 bx K
-b0 J
+bx J
 bx I
-bx H
+b0 H
 bx G
-b0 F
-bx E
-bx D
+xF
+b0 E
+b0 D
 bx C
 bx B
 bx A
 bx @
-b0 ?
-x>
-b0 =
-b0 <
+bx ?
+0>
+0=
+bx <
 bx ;
 bx :
 bx 9
-bx 8
-bx 7
+b0 8
+07
 bx 6
 bx 5
 bx 4
-b0 3
+bx 3
 bx 2
 bx 1
 bx 0
-bx /
-bx .
+b0 /
+b0 .
 bx -
-b0 ,
-b0 +
-bx *
-0)
-bx (
-bx '
+bx ,
+bx +
+b0 *
+b100000000 )
+1(
+0'
 b0 &
-b100000000 %
-1$
-0#
+bx %
+0$
+bx #
 bx "
-bx !
+b0 !
 $end
 #5000
-b0 1
-b0 A
-b0 H
-b0 _
+b0 !
 b0 *
-b0 ;
-b0 W
 b0 /
-b0 @
-b0 G
-b0 Y
-b0 ^
-0>
-b0 +
-b0 <
-b0 V
-b0 3
-b0 `
-b0 d
-b0 =
-b0 F
-b0 U
-b0 a
-b10011 7
-b10011 B
-b10011 O
-b0 4
-b0 N
-b0 Z
-b0 :
-b0 E
-b0 I
+b0 l
+b101010 8
+b101010 i
+b101010 m
+b0 5
+b0 J
 b0 R
-b0 2
-b0 M
-b0 \
-b0 0
-b0 L
-b0 ]
-b0 9
-b0 D
-b0 Q
-b0 8
-b0 C
-b0 P
-b10011 !
-b10011 '
-b10011 .
-b10011 K
-b100 5
-b100 S
-b0 "
-b0 (
+b0 h
+b0 %
 b0 -
+b0 C
+b0 b
+b0 2
+b0 G
+b0 c
+b0 3
+b0 I
+b0 Q
+b0 g
+0F
+17
+b101010 &
+b101010 .
+b101010 D
+b101010 a
+b101010 E
+b101010 P
+b101010 `
+b101010 k
+b10011 <
+b10011 K
+b10011 Y
+b10 9
+b10 X
+b10 d
+b0 B
+b0 O
+b0 S
+b0 ]
 b0 6
-b0 T
-1#
+b0 W
+b0 e
+b1010 4
+b1010 V
+b1010 f
+b1 A
+b1 N
+b1 \
+b101010 @
+b101010 M
+b101010 [
+b100010 ?
+b100010 L
+b100010 Z
+b10101000000000000100010011 "
+b10101000000000000100010011 +
+b10101000000000000100010011 1
+b10101000000000000100010011 U
+b100 :
+b100 ^
+b0 #
+b0 ,
+b0 0
+b0 ;
+b0 _
+b100000 j
+1'
 #10000
-0#
+0'
 #15000
-1#
+b100000 j
+1'
 #20000
-0#
-0$
+0'
+0(
 #25000
-b1000 5
-b1000 S
-b100 "
-b100 (
-b100 -
-b100 6
-b100 T
-1#
+b0 8
+b0 i
+b0 m
+17
+b0 &
+b0 .
+b0 D
+b0 a
+b0 E
+b0 P
+b0 `
+b0 k
+b1 9
+b1 X
+b1 d
+b0 4
+b0 V
+b0 f
+b0 A
+b0 N
+b0 \
+b0 @
+b0 M
+b0 [
+b1 ?
+b1 L
+b1 Z
+b10010011 "
+b10010011 +
+b10010011 1
+b10010011 U
+b1000 :
+b1000 ^
+b100 #
+b100 ,
+b100 0
+b100 ;
+b100 _
+1'
 #30000
-0#
+0'
 #35000
-b1100 5
-b1100 S
-b1000 "
-b1000 (
-b1000 -
-b1000 6
-b1000 T
-1#
+b101010 %
+b101010 -
+b101010 C
+b101010 b
+b101010 2
+b101010 G
+b101010 c
+b101010 3
+b101010 I
+b101010 Q
+b101010 g
+1$
+1=
+07
+b100011 <
+b100011 K
+b100011 Y
+b0 9
+b0 X
+b0 d
+b11 B
+b11 O
+b11 S
+b11 ]
+b1 6
+b1 W
+b1 e
+b10 4
+b10 V
+b10 f
+b10 @
+b10 M
+b10 [
+b0 ?
+b0 L
+b0 Z
+b1000001011000000100011 "
+b1000001011000000100011 +
+b1000001011000000100011 1
+b1000001011000000100011 U
+b1100 :
+b1100 ^
+b1000 #
+b1000 ,
+b1000 0
+b1000 ;
+b1000 _
+1'
 #40000
-0#
+0'
 #45000
-b10000 5
-b10000 S
-b1100 "
-b1100 (
-b1100 -
-b1100 6
-b1100 T
-1#
+b101010 8
+b101010 i
+b101010 m
+b0 %
+b0 -
+b0 C
+b0 b
+b0 2
+b0 G
+b0 c
+b0 3
+b0 I
+b0 Q
+b0 g
+17
+1>
+0$
+0=
+b11 <
+b11 K
+b11 Y
+b11 9
+b11 X
+b11 d
+b0 4
+b0 V
+b0 f
+b0 @
+b0 M
+b0 [
+b11 ?
+b11 L
+b11 Z
+b1011000110000011 "
+b1011000110000011 +
+b1011000110000011 1
+b1011000110000011 U
+b10000 :
+b10000 ^
+b1100 #
+b1100 ,
+b1100 0
+b1100 ;
+b1100 _
+b101010 !
+b101010 *
+b101010 /
+b101010 l
+1'
 #50000
-0#
+0'
 #55000
-b10100 5
-b10100 S
-b10000 "
-b10000 (
-b10000 -
-b10000 6
-b10000 T
-1#
+b0 8
+b0 i
+b0 m
+17
+0>
+b10011 <
+b10011 K
+b10011 Y
+b0 9
+b0 X
+b0 d
+b0 B
+b0 O
+b0 S
+b0 ]
+b0 6
+b0 W
+b0 e
+b0 ?
+b0 L
+b0 Z
+b10011 "
+b10011 +
+b10011 1
+b10011 U
+b10100 :
+b10100 ^
+b10000 #
+b10000 ,
+b10000 0
+b10000 ;
+b10000 _
+1'
 #60000
-0#
+0'
 #65000
-b11000 5
-b11000 S
-b10100 "
-b10100 (
-b10100 -
-b10100 6
-b10100 T
-1#
+b11000 :
+b11000 ^
+b10100 #
+b10100 ,
+b10100 0
+b10100 ;
+b10100 _
+1'
 #70000
-0#
+0'
 #75000
-b11100 5
-b11100 S
-b11000 "
-b11000 (
-b11000 -
-b11000 6
-b11000 T
-1#
+b11100 :
+b11100 ^
+b11000 #
+b11000 ,
+b11000 0
+b11000 ;
+b11000 _
+1'
 #80000
-0#
+0'
 #85000
-b100000 5
-b100000 S
-b11100 "
-b11100 (
-b11100 -
-b11100 6
-b11100 T
-1#
+b100000 :
+b100000 ^
+b11100 #
+b11100 ,
+b11100 0
+b11100 ;
+b11100 _
+1'
 #90000
-0#
+0'
 #95000
-b100100 5
-b100100 S
-b100000 "
-b100000 (
-b100000 -
-b100000 6
-b100000 T
-1#
+b100100 :
+b100100 ^
+b100000 #
+b100000 ,
+b100000 0
+b100000 ;
+b100000 _
+1'
 #100000
-0#
+0'
 #105000
-b101000 5
-b101000 S
-b100100 "
-b100100 (
-b100100 -
-b100100 6
-b100100 T
-1#
+b101000 :
+b101000 ^
+b100100 #
+b100100 ,
+b100100 0
+b100100 ;
+b100100 _
+1'
 #110000
-0#
+0'
 #115000
-b101100 5
-b101100 S
-b101000 "
-b101000 (
-b101000 -
-b101000 6
-b101000 T
-1#
+b101100 :
+b101100 ^
+b101000 #
+b101000 ,
+b101000 0
+b101000 ;
+b101000 _
+1'
 #120000
-0#
+0'
 #125000
-b110000 5
-b110000 S
-b101100 "
-b101100 (
-b101100 -
-b101100 6
-b101100 T
-1#
+b110000 :
+b110000 ^
+b101100 #
+b101100 ,
+b101100 0
+b101100 ;
+b101100 _
+1'
 #130000
-0#
+0'
 #135000
-b110100 5
-b110100 S
-b110000 "
-b110000 (
-b110000 -
-b110000 6
-b110000 T
-1#
+b110100 :
+b110100 ^
+b110000 #
+b110000 ,
+b110000 0
+b110000 ;
+b110000 _
+1'
 #140000
-0#
+0'
 #145000
-b111000 5
-b111000 S
-b110100 "
-b110100 (
-b110100 -
-b110100 6
-b110100 T
-1#
+b111000 :
+b111000 ^
+b110100 #
+b110100 ,
+b110100 0
+b110100 ;
+b110100 _
+1'
 #150000
-0#
+0'
 #155000
-b111100 5
-b111100 S
-b111000 "
-b111000 (
-b111000 -
-b111000 6
-b111000 T
-1#
+b111100 :
+b111100 ^
+b111000 #
+b111000 ,
+b111000 0
+b111000 ;
+b111000 _
+1'
 #160000
-0#
+0'
 #165000
-b1000000 5
-b1000000 S
-b111100 "
-b111100 (
-b111100 -
-b111100 6
-b111100 T
-1#
+b1000000 :
+b1000000 ^
+b111100 #
+b111100 ,
+b111100 0
+b111100 ;
+b111100 _
+1'
 #170000
-0#
+0'
 #175000
-b1000100 5
-b1000100 S
-b1000000 "
-b1000000 (
-b1000000 -
-b1000000 6
-b1000000 T
-1#
+b1000100 :
+b1000100 ^
+b1000000 #
+b1000000 ,
+b1000000 0
+b1000000 ;
+b1000000 _
+1'
 #180000
-0#
+0'
 #185000
-b1001000 5
-b1001000 S
-b1000100 "
-b1000100 (
-b1000100 -
-b1000100 6
-b1000100 T
-1#
+b1001000 :
+b1001000 ^
+b1000100 #
+b1000100 ,
+b1000100 0
+b1000100 ;
+b1000100 _
+1'
 #190000
-0#
+0'
 #195000
-b1001100 5
-b1001100 S
-b1001000 "
-b1001000 (
-b1001000 -
-b1001000 6
-b1001000 T
-1#
+b1001100 :
+b1001100 ^
+b1001000 #
+b1001000 ,
+b1001000 0
+b1001000 ;
+b1001000 _
+1'
 #200000
-0#
+0'
 #205000
-b1010000 5
-b1010000 S
-b1001100 "
-b1001100 (
-b1001100 -
-b1001100 6
-b1001100 T
-1#
+b1010000 :
+b1010000 ^
+b1001100 #
+b1001100 ,
+b1001100 0
+b1001100 ;
+b1001100 _
+1'
 #210000
-0#
+0'
 #215000
-b1010100 5
-b1010100 S
-b1010000 "
-b1010000 (
-b1010000 -
-b1010000 6
-b1010000 T
-1#
+b1010100 :
+b1010100 ^
+b1010000 #
+b1010000 ,
+b1010000 0
+b1010000 ;
+b1010000 _
+1'
 #220000
-0#
+0'
 #225000
-b1011000 5
-b1011000 S
-b1010100 "
-b1010100 (
-b1010100 -
-b1010100 6
-b1010100 T
-1#
+b1011000 :
+b1011000 ^
+b1010100 #
+b1010100 ,
+b1010100 0
+b1010100 ;
+b1010100 _
+1'
 #230000
-0#
+0'
 #235000
-b1011100 5
-b1011100 S
-b1011000 "
-b1011000 (
-b1011000 -
-b1011000 6
-b1011000 T
-1#
+b1011100 :
+b1011100 ^
+b1011000 #
+b1011000 ,
+b1011000 0
+b1011000 ;
+b1011000 _
+1'
 #240000
-0#
+0'
 #245000
-b1100000 5
-b1100000 S
-b1011100 "
-b1011100 (
-b1011100 -
-b1011100 6
-b1011100 T
-1#
+b1100000 :
+b1100000 ^
+b1011100 #
+b1011100 ,
+b1011100 0
+b1011100 ;
+b1011100 _
+1'
 #250000
-0#
+0'
 #255000
-b1100100 5
-b1100100 S
-b1100000 "
-b1100000 (
-b1100000 -
-b1100000 6
-b1100000 T
-1#
+b1100100 :
+b1100100 ^
+b1100000 #
+b1100000 ,
+b1100000 0
+b1100000 ;
+b1100000 _
+1'
 #260000
-0#
+0'
 #265000
-b1101000 5
-b1101000 S
-b1100100 "
-b1100100 (
-b1100100 -
-b1100100 6
-b1100100 T
-1#
+b1101000 :
+b1101000 ^
+b1100100 #
+b1100100 ,
+b1100100 0
+b1100100 ;
+b1100100 _
+1'
 #270000
-0#
+0'
 #275000
-b1101100 5
-b1101100 S
-b1101000 "
-b1101000 (
-b1101000 -
-b1101000 6
-b1101000 T
-1#
+b1101100 :
+b1101100 ^
+b1101000 #
+b1101000 ,
+b1101000 0
+b1101000 ;
+b1101000 _
+1'
 #280000
-0#
+0'
 #285000
-b1110000 5
-b1110000 S
-b1101100 "
-b1101100 (
-b1101100 -
-b1101100 6
-b1101100 T
-1#
+b1110000 :
+b1110000 ^
+b1101100 #
+b1101100 ,
+b1101100 0
+b1101100 ;
+b1101100 _
+1'
 #290000
-0#
+0'
 #295000
-b1110100 5
-b1110100 S
-b1110000 "
-b1110000 (
-b1110000 -
-b1110000 6
-b1110000 T
-1#
+b1110100 :
+b1110100 ^
+b1110000 #
+b1110000 ,
+b1110000 0
+b1110000 ;
+b1110000 _
+1'
 #300000
-0#
+0'
 #305000
-b1111000 5
-b1111000 S
-b1110100 "
-b1110100 (
-b1110100 -
-b1110100 6
-b1110100 T
-1#
+b1111000 :
+b1111000 ^
+b1110100 #
+b1110100 ,
+b1110100 0
+b1110100 ;
+b1110100 _
+1'
 #310000
-0#
+0'
 #315000
-b1111100 5
-b1111100 S
-b1111000 "
-b1111000 (
-b1111000 -
-b1111000 6
-b1111000 T
-1#
+b1111100 :
+b1111100 ^
+b1111000 #
+b1111000 ,
+b1111000 0
+b1111000 ;
+b1111000 _
+1'
 #320000
-0#
-#325000
-b10000000 5
-b10000000 S
-b1111100 "
-b1111100 (
-b1111100 -
-b1111100 6
-b1111100 T
-1#
-#330000
-0#
-#335000
-b10000100 5
-b10000100 S
-b10000000 "
-b10000000 (
-b10000000 -
-b10000000 6
-b10000000 T
-1#
-#340000
-0#
-#345000
-b10001000 5
-b10001000 S
-b10000100 "
-b10000100 (
-b10000100 -
-b10000100 6
-b10000100 T
-1#
-#350000
-0#
-#355000
-b10001100 5
-b10001100 S
-b10001000 "
-b10001000 (
-b10001000 -
-b10001000 6
-b10001000 T
-1#
-#360000
-0#
-#365000
-b10010000 5
-b10010000 S
-b10001100 "
-b10001100 (
-b10001100 -
-b10001100 6
-b10001100 T
-1#
-#370000
-0#
-#375000
-b10010100 5
-b10010100 S
-b10010000 "
-b10010000 (
-b10010000 -
-b10010000 6
-b10010000 T
-1#
-#380000
-0#
-#385000
-b10011000 5
-b10011000 S
-b10010100 "
-b10010100 (
-b10010100 -
-b10010100 6
-b10010100 T
-1#
-#390000
-0#
-#395000
-b10011100 5
-b10011100 S
-b10011000 "
-b10011000 (
-b10011000 -
-b10011000 6
-b10011000 T
-1#
-#400000
-0#
-#405000
-b10100000 5
-b10100000 S
-b10011100 "
-b10011100 (
-b10011100 -
-b10011100 6
-b10011100 T
-1#
-#410000
-0#
-#415000
-b10100100 5
-b10100100 S
-b10100000 "
-b10100000 (
-b10100000 -
-b10100000 6
-b10100000 T
-1#
-#420000
-0#
-#425000
-b10101000 5
-b10101000 S
-b10100100 "
-b10100100 (
-b10100100 -
-b10100100 6
-b10100100 T
-1#
-#430000
-0#
-#435000
-b10101100 5
-b10101100 S
-b10101000 "
-b10101000 (
-b10101000 -
-b10101000 6
-b10101000 T
-1#
-#440000
-0#
-#445000
-b10110000 5
-b10110000 S
-b10101100 "
-b10101100 (
-b10101100 -
-b10101100 6
-b10101100 T
-1#
-#450000
-0#
-#455000
-b10110100 5
-b10110100 S
-b10110000 "
-b10110000 (
-b10110000 -
-b10110000 6
-b10110000 T
-1#
-#460000
-0#
-#465000
-b10111000 5
-b10111000 S
-b10110100 "
-b10110100 (
-b10110100 -
-b10110100 6
-b10110100 T
-1#
-#470000
-0#
-#475000
-b10111100 5
-b10111100 S
-b10111000 "
-b10111000 (
-b10111000 -
-b10111000 6
-b10111000 T
-1#
-#480000
-0#
-#485000
-b11000000 5
-b11000000 S
-b10111100 "
-b10111100 (
-b10111100 -
-b10111100 6
-b10111100 T
-1#
-#490000
-0#
-#495000
-b11000100 5
-b11000100 S
-b11000000 "
-b11000000 (
-b11000000 -
-b11000000 6
-b11000000 T
-1#
-#500000
-0#
-#505000
-b11001000 5
-b11001000 S
-b11000100 "
-b11000100 (
-b11000100 -
-b11000100 6
-b11000100 T
-1#
-#510000
-0#
-#515000
-b11001100 5
-b11001100 S
-b11001000 "
-b11001000 (
-b11001000 -
-b11001000 6
-b11001000 T
-1#
-#520000
-0#
+0'

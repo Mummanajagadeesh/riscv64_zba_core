@@ -14,20 +14,43 @@ module tb_processor;
     logic [31:0] instr_mem [0:255];
 
     // =====================
+    // Data memory (MODEL)
+    // =====================
+    logic [63:0] data_mem [0:255];
+
+    // =====================
     // DUT interface
     // =====================
     logic [63:0] instr_addr;
     logic [31:0] instr_data;
 
+    logic [63:0] data_mem_addr;
+    logic [63:0] data_mem_wdata;
+    logic        data_mem_we;
+    logic [63:0] data_mem_rdata;
+
     // =====================
     // Clock generation
     // =====================
-    always #5 clk = ~clk;   // 100 MHz
+    always #5 clk = ~clk;
 
     // =====================
     // Instruction fetch
     // =====================
     assign instr_data = instr_mem[instr_addr >> 2];
+
+    // =====================
+    // Data memory model
+    // =====================
+    assign data_mem_rdata = data_mem[data_mem_addr >> 3];
+
+    always @(posedge clk) begin
+        if (data_mem_we) begin
+            data_mem[data_mem_addr >> 3] <= data_mem_wdata;
+            $display("MEM WRITE: addr=0x%0h data=0x%0h",
+                     data_mem_addr, data_mem_wdata);
+        end
+    end
 
     // =====================
     // DUT
@@ -37,34 +60,33 @@ module tb_processor;
         .rst(rst),
         .instr_mem_rdata(instr_data),
         .instr_mem_addr(instr_addr),
-        .data_mem_rdata(64'b0),
-        .data_mem_addr(),
-        .data_mem_wdata(),
-        .data_mem_we()
+        .data_mem_rdata(data_mem_rdata),
+        .data_mem_addr(data_mem_addr),
+        .data_mem_wdata(data_mem_wdata),
+        .data_mem_we(data_mem_we)
     );
 
     integer i;
 
     initial begin
         // ---------------------
-        // Waveform dump
+        // Waveform
         // ---------------------
         $dumpfile("wave.vcd");
         $dumpvars(0, tb_processor);
 
         // ---------------------
-        // Initialize memory with NOPs
-        // NOP = addi x0,x0,0 = 0x00000013
+        // Init memories
         // ---------------------
-        for (i = 0; i < 256; i = i + 1)
-            instr_mem[i] = 32'h00000013;
+        for (i = 0; i < 256; i = i + 1) begin
+            instr_mem[i] = 32'h00000013; // NOP
+            data_mem[i]  = 64'h0;
+        end
 
         // ---------------------
-        // Load ONLY first N words from program.hex
-        // This avoids Icarus warnings
+        // Load program
         // ---------------------
         $readmemh("program.hex", instr_mem, 0, 255);
-        // ^ loads at most 64 instructions
 
         // ---------------------
         // Reset
@@ -76,22 +98,24 @@ module tb_processor;
         // ---------------------
         // Run
         // ---------------------
-        #500;
+        #300;
+
+        // ---------------------
+        // CHECK RESULTS
+        // ---------------------
+        if (dut.core.rf.regs[3] !== 64'd42) begin
+            $fatal(1,
+                   "LD/SD FAILED: x3 = 0x%0h",
+                   dut.core.rf.regs[3]);
+        end else begin
+            $display("LD/SD PASSED: x3 = 0x%0h",
+                     dut.core.rf.regs[3]);
+        end
 
         $display("=================================");
-        $display("Simulation PASSED");
+        $display("TEST PASSED");
         $display("=================================");
         $finish;
-    end
-
-    // =====================
-    // Debug trace
-    // =====================
-    always @(posedge clk) begin
-        if (!rst) begin
-            $display("TIME=%0t | PC=0x%08h | INSTR=0x%08h",
-                     $time, instr_addr, instr_data);
-        end
     end
 
 endmodule
