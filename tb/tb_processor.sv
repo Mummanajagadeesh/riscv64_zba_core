@@ -103,13 +103,13 @@ module tb_processor;
         // ---------------------
         // CHECK RESULTS
         // ---------------------
-        if (dut.core.rf.regs[3] !== 64'd42) begin
+        if (dut.core.rf.regs[4] !== 64'd5) begin
             $fatal(1,
-                   "LD/SD FAILED: x3 = 0x%0h",
-                   dut.core.rf.regs[3]);
+                "BEQ FAILED: x4 = 0x%0h",
+                dut.core.rf.regs[4]);
         end else begin
-            $display("LD/SD PASSED: x3 = 0x%0h",
-                     dut.core.rf.regs[3]);
+            $display("BEQ PASSED: x4 = %0d",
+                    dut.core.rf.regs[4]);
         end
 
         $display("=================================");

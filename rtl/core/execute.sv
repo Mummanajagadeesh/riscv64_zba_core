@@ -3,6 +3,7 @@ module execute (
     input  logic [63:0] rs2_data,
     input  logic [63:0] imm_i,
     input  logic [63:0] imm_s,
+    input  logic [63:0] imm_b,
 
     input  logic [6:0]  opcode,
     input  logic [2:0]  funct3,
@@ -12,13 +13,17 @@ module execute (
     output logic [63:0] store_data,
     output logic        mem_we,
     output logic        mem_to_reg,
-    output logic        rd_we
+    output logic        rd_we,
+
+    output logic        branch_taken,
+    output logic [63:0] branch_offset
 );
 
     logic [63:0] zba_result;
     logic        is_zba;
 
-    assign store_data = rs2_data;
+    assign store_data    = rs2_data;
+    assign branch_offset = imm_b;
 
     assign is_zba = (opcode == 7'b0110011) &&
                     (funct7 == 7'b0000100);
@@ -31,10 +36,14 @@ module execute (
     );
 
     always_comb begin
-        alu_result = 64'b0;
-        mem_we     = 1'b0;
-        mem_to_reg = 1'b0;
-        rd_we      = 1'b0;
+        // ---------------------
+        // defaults (CRITICAL)
+        // ---------------------
+        alu_result   = 64'b0;
+        mem_we       = 1'b0;
+        mem_to_reg   = 1'b0;
+        rd_we        = 1'b0;
+        branch_taken = 1'b0;
 
         case (opcode)
 
@@ -59,7 +68,7 @@ module execute (
             end
 
             // =====================
-            // I-TYPE (ADDI)
+            // ADDI
             // =====================
             7'b0010011: begin
                 if (funct3 == 3'b000) begin
@@ -83,7 +92,17 @@ module execute (
             7'b0100011: begin
                 alu_result = rs1_data + imm_s;
                 mem_we     = 1'b1;
-                rd_we      = 1'b0;
+            end
+
+            // =====================
+            // BRANCH (BEQ / BNE)
+            // =====================
+            7'b1100011: begin
+                case (funct3)
+                    3'b000: branch_taken = (rs1_data == rs2_data); // BEQ
+                    3'b001: branch_taken = (rs1_data != rs2_data); // BNE
+                    default: branch_taken = 1'b0;
+                endcase
             end
 
             default: ;
