@@ -11,35 +11,29 @@ module riscv_core (
     output logic        data_mem_we
 );
 
-    // =====================
-    // FETCH
-    // =====================
     logic [63:0] pc, pc_next;
 
-    // =====================
-    // DECODE
-    // =====================
     logic [6:0] opcode, funct7;
     logic [4:0] rs1, rs2, rd;
     logic [2:0] funct3;
-    logic [63:0] imm_i, imm_s, imm_b;
+    logic [63:0] imm_i, imm_s, imm_b, imm_j;
 
-    // =====================
-    // REGFILE
-    // =====================
     logic [63:0] rs1_data, rs2_data, rd_data;
-    logic        rd_we;
+    logic rd_we;
 
-    // =====================
-    // EXECUTE
-    // =====================
     logic [63:0] alu_result, store_data;
-    logic        mem_we, mem_to_reg;
-    logic        branch_taken;
+    logic mem_we, mem_to_reg;
+
+    logic branch_taken;
     logic [63:0] branch_offset;
 
-    // PC update
-    assign pc_next = branch_taken ? (pc + branch_offset) : (pc + 4);
+    logic jump_taken;
+    logic [63:0] jump_target;
+
+    assign pc_next =
+        jump_taken   ? jump_target :
+        branch_taken ? (pc + branch_offset) :
+                        (pc + 4);
 
     fetch if_stage (
         .clk(clk),
@@ -50,7 +44,7 @@ module riscv_core (
 
     assign instr_mem_addr = pc;
 
-    decode id_stage (
+    decode id (
         .instr(instr_mem_rdata),
         .opcode(opcode),
         .rs1(rs1),
@@ -60,7 +54,8 @@ module riscv_core (
         .funct7(funct7),
         .imm_i(imm_i),
         .imm_s(imm_s),
-        .imm_b(imm_b)
+        .imm_b(imm_b),
+        .imm_j(imm_j)
     );
 
     regfile rf (
@@ -75,25 +70,29 @@ module riscv_core (
         .rs2_data(rs2_data)
     );
 
-    execute ex_stage (
+    execute ex (
         .rs1_data(rs1_data),
         .rs2_data(rs2_data),
         .imm_i(imm_i),
         .imm_s(imm_s),
         .imm_b(imm_b),
+        .imm_j(imm_j),
         .opcode(opcode),
         .funct3(funct3),
         .funct7(funct7),
+        .pc(pc),
         .alu_result(alu_result),
         .store_data(store_data),
         .mem_we(mem_we),
         .mem_to_reg(mem_to_reg),
         .rd_we(rd_we),
         .branch_taken(branch_taken),
-        .branch_offset(branch_offset)
+        .branch_offset(branch_offset),
+        .jump_taken(jump_taken),
+        .jump_target(jump_target)
     );
 
-    mem_stage mem_stage_i (
+    mem_stage mem (
         .alu_result(alu_result),
         .store_data(store_data),
         .mem_we(mem_we),
@@ -102,7 +101,7 @@ module riscv_core (
         .data_mem_we(data_mem_we)
     );
 
-    writeback wb_stage (
+    writeback wb (
         .alu_result(alu_result),
         .mem_data(data_mem_rdata),
         .mem_to_reg(mem_to_reg),

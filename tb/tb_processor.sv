@@ -103,13 +103,13 @@ module tb_processor;
         // ---------------------
         // CHECK RESULTS
         // ---------------------
-        if (dut.core.rf.regs[4] !== 64'd5) begin
+        if (dut.core.rf.regs[2] !== 64'd5) begin
             $fatal(1,
-                "BEQ FAILED: x4 = 0x%0h",
-                dut.core.rf.regs[4]);
+                "JAL/JALR FAILED: x2 = 0x%0h",
+                dut.core.rf.regs[2]);
         end else begin
-            $display("BEQ PASSED: x4 = %0d",
-                    dut.core.rf.regs[4]);
+            $display("JAL/JALR PASSED: x2 = %0d",
+                     dut.core.rf.regs[2]);
         end
 
         $display("=================================");
