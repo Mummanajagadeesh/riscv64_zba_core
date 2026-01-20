@@ -5,6 +5,7 @@ module alu (
     input  [63:0] SrcBE,          // RV64 operands
     input  [3:0]  ALUControlE,    // extended ALU control
     input  [2:0]  funct3E,
+    input         BranchE,        // <<< NEW
     output [63:0] ALUResult,
     output reg    ZeroE
 );
@@ -13,16 +14,20 @@ module alu (
   assign ALUResult = ALU_Result;
 
   // --------------------------------------------------
-  // Branch comparison logic
+  // Branch comparison logic (VALID ONLY FOR BRANCH)
   // --------------------------------------------------
   always @(*) begin
-    case (funct3E)
-      3'b000:  ZeroE = (SrcAE == SrcBE);                     // beq
-      3'b001:  ZeroE = (SrcAE != SrcBE);                     // bne
-      3'b100:  ZeroE = ($signed(SrcAE) < $signed(SrcBE));    // blt
-      3'b101:  ZeroE = ($signed(SrcAE) >= $signed(SrcBE));   // bge
-      default: ZeroE = 1'b0;
-    endcase
+    if (!BranchE) begin
+      ZeroE = 1'b0;
+    end else begin
+      case (funct3E)
+        3'b000: ZeroE = (SrcAE == SrcBE);                   // beq
+        3'b001: ZeroE = (SrcAE != SrcBE);                   // bne
+        3'b100: ZeroE = ($signed(SrcAE) < $signed(SrcBE));  // blt
+        3'b101: ZeroE = ($signed(SrcAE) >= $signed(SrcBE)); // bge
+        default: ZeroE = 1'b0;
+      endcase
+    end
   end
 
   // --------------------------------------------------

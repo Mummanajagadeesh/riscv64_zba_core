@@ -12,3 +12,11 @@ Features:
 
 Pipeline:
 IF → ID → EX → MEM → WB
+
+
+<!-- 
+```
+riscv64-unknown-elf-as sw/instruction.S -o instruction.o
+riscv64-unknown-elf-objdump -d instruction.o
+``` -->
+

@@ -1,3 +1,5 @@
+`timescale 1ns / 1ns
+
 module reglayer_two (
     input  [63:0] PCD,
     input  [63:0] ExtImmD,
@@ -15,7 +17,6 @@ module reglayer_two (
     input         JumpD,
     input         BranchD,
     input         ALUSrcD,
-    input         ZeroE,
     input         FlushE,
     input  [1:0]  ResultSrcD,
     input  [3:0]  ALUControlD,
@@ -26,7 +27,6 @@ module reglayer_two (
     output reg        JumpE,
     output reg        BranchE,
     output reg        ALUSrcE,
-    output reg [1:0]  PCSrcE,
     output reg [1:0]  ResultSrcE,
     output reg [3:0]  ALUControlE,
     output reg [63:0] PCE,
@@ -40,14 +40,14 @@ module reglayer_two (
     output reg [4:0]  Rs2E,
     output reg [6:0]  OPE
 );
+
   always @(posedge clk) begin
     if (rst || FlushE) begin
-      RegWriteE   <= 0;
-      MemWriteE   <= 0;
-      JumpE       <= 0;
-      BranchE     <= 0;
-      PCSrcE      <= 2'b00;
-      ALUSrcE     <= 0;
+      RegWriteE   <= 1'b0;
+      MemWriteE   <= 1'b0;
+      JumpE       <= 1'b0;
+      BranchE     <= 1'b0;
+      ALUSrcE     <= 1'b0;
       ResultSrcE  <= 2'b00;
       ALUControlE <= 4'b0000;
       PCE         <= 64'd0;
@@ -81,10 +81,4 @@ module reglayer_two (
     end
   end
 
-  always @(*) begin
-    PCSrcE =
-      ((ZeroE && BranchE) || (OPE == 7'b1101111)) ? 2'b01 :
-      (OPE == 7'b1100111)                         ? 2'b10 :
-                                                     2'b00;
-  end
 endmodule

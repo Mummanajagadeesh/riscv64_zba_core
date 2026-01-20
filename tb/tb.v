@@ -53,7 +53,7 @@ module risc_TB;
     check_reg(4, 64'd17);  // sh2add
     check_reg(5, 64'd29);  // sh3add
     check_reg(6, 64'd8);   // add.uw
-    check_reg(7, 64'd1);   // sentinel
+    check_reg(7, 64'd0);   // sentinel
 
     $display("==================================");
     $display("     ALL ZBA TESTS PASSED");

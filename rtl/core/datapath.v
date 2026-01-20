@@ -66,6 +66,18 @@ module datapath (
   wire [4:0]  A3;
 
   // --------------------------------------------------
+  // PCSrcE REGISTER (THIS IS THE FIX)
+  // --------------------------------------------------
+  reg [1:0] PCSrcE_r;
+
+  always @(posedge clk) begin
+    if (rst || FlushE)
+      PCSrcE_r <= 2'b00;
+    else
+      PCSrcE_r <= PCSrcE;
+  end
+
+  // --------------------------------------------------
   // Fetch / Decode
   // --------------------------------------------------
   Instruction_Memory instmeme (
@@ -116,7 +128,7 @@ module datapath (
   );
 
   // --------------------------------------------------
-  // PC logic
+  // PC logic (USE REGISTERED PCSrcE)
   // --------------------------------------------------
   Adress_Generator pcgen (
       .rst(rst),
@@ -135,7 +147,7 @@ module datapath (
       .PCPlus4F(PCPlus4F),
       .PCTargetE(PCTargetE),
       .ALUResultM(ALUResultM),
-      .PCSrcE(PCSrcE),
+      .PCSrcE(PCSrcE_r),
       .PCnext(PCnext)
   );
 
@@ -214,11 +226,11 @@ module datapath (
       .SrcBE(SrcBE),
       .ALUControlE(ALUControlE),
       .funct3E(funct3E),
+      .BranchE(BranchE),
       .ALUResult(ALUResult),
       .ZeroE(ZeroE)
   );
 
-  // --------- CORRECT PCSrcE COMPUTATION (EX stage) ---------
   assign PCSrcE =
       (BranchE && ZeroE) ? 2'b01 :
       (JumpE && (OPE == 7'b1101111)) ? 2'b01 :

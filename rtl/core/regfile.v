@@ -1,3 +1,4 @@
+`timescale 1ns / 1ns
 module Register_File (
     input  [4:0]  A1,
     input  [4:0]  A2,
@@ -13,13 +14,30 @@ module Register_File (
   reg [63:0] Registers [0:31];
   integer i;
 
-  // Read ports (combinational)
+  // --------------------------------------------------
+  // READ PORTS WITH WRITE-BYPASS (CRITICAL FIX)
+  // --------------------------------------------------
   always @(*) begin
-    RD1 = (A1 == 5'd0) ? 64'd0 : Registers[A1];
-    RD2 = (A2 == 5'd0) ? 64'd0 : Registers[A2];
+    // RD1
+    if (A1 == 5'd0)
+      RD1 = 64'd0;
+    else if (WE3 && (A3 == A1))
+      RD1 = WD3;                 // write-before-read bypass
+    else
+      RD1 = Registers[A1];
+
+    // RD2
+    if (A2 == 5'd0)
+      RD2 = 64'd0;
+    else if (WE3 && (A3 == A2))
+      RD2 = WD3;                 // write-before-read bypass
+    else
+      RD2 = Registers[A2];
   end
 
-  // Write port (clocked)
+  // --------------------------------------------------
+  // WRITE PORT
+  // --------------------------------------------------
   always @(posedge clk) begin
     if (rst) begin
       for (i = 0; i < 32; i = i + 1)
