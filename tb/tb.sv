@@ -44,7 +44,7 @@ module risc_TB;
   end
 
   // -----------------------------
-  // DATA MEMORY MONITOR (REQUIRED)
+  // DATA MEMORY MONITOR
   // -----------------------------
   always @(posedge clk) begin
     if (CPU.DP.MemWriteM) begin
@@ -56,10 +56,9 @@ module risc_TB;
   end
 
   // -----------------------------
-  // Self-checking logic
+  // SELF-CHECK (ASSERT PROPERTIES)
   // -----------------------------
   initial begin
-    // Allow program to complete
     repeat (200) @(posedge clk);
 
     $display("");
@@ -67,13 +66,13 @@ module risc_TB;
     $display("     ZBA SELF CHECK START");
     $display("==================================");
 
-    check_reg(1, 64'd5);   // addi
-    check_reg(2, 64'd3);   // addi
-    check_reg(3, 64'd11);  // sh1add
-    check_reg(4, 64'd17);  // sh2add
-    check_reg(5, 64'd29);  // sh3add
-    check_reg(6, 64'd8);   // add.uw
-    check_reg(7, 64'd0);   // sentinel
+    check_reg(1, 64'd5);
+    check_reg(2, 64'd3);
+    check_reg(3, 64'd11);
+    check_reg(4, 64'd17);
+    check_reg(5, 64'd29);
+    check_reg(6, 64'd8);
+    check_reg(7, 64'd0);
 
     $display("==================================");
     $display("     ALL ZBA TESTS PASSED");
@@ -84,7 +83,7 @@ module risc_TB;
   end
 
   // -----------------------------
-  // Register check task
+  // REGISTER ASSERTION TASK
   // -----------------------------
   task check_reg(
     input int regnum,
@@ -93,13 +92,14 @@ module risc_TB;
     reg [63:0] actual;
     begin
       actual = CPU.DP.regf.Registers[regnum];
+
       if (actual !== expected) begin
-        $display("FAIL: x%0d = %0d (expected %0d)",
-                 regnum, actual, expected);
+        $error("ASSERT FAIL: x%0d = %0d (expected %0d)",
+               regnum, actual, expected);
         $fatal;
-      end else begin
-        $display("PASS: x%0d = %0d", regnum, actual);
       end
+
+      $display("ASSERT PASS: x%0d = %0d", regnum, actual);
     end
   endtask
 

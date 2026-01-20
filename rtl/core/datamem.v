@@ -5,7 +5,7 @@ module datamem (
     input  [63:0] A,         // byte address
     input         clk,
     input         WE,
-    input         rst,        // kept for interface consistency
+    input         rst,        
     output reg [63:0] ReadData
 );
 
