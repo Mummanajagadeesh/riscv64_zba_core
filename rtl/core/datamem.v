@@ -5,31 +5,33 @@ module datamem (
     input  [63:0] A,         // byte address
     input         clk,
     input         WE,
-    input         rst,
+    input         rst,        // kept for interface consistency
     output reg [63:0] ReadData
 );
 
+  // 64-bit word-addressable data memory
   reg [63:0] Data_Mem [0:999];
-  integer i;
 
-  // Initialize memory
+  // --------------------------------------------------
+  // Memory initialization from file
+  // --------------------------------------------------
   initial begin
     $readmemh("datamemory.mem", Data_Mem);
   end
 
-  // Combinational read
+  // --------------------------------------------------
+  // Combinational read (single-cycle load model)
+  // --------------------------------------------------
   always @(*) begin
-    ReadData = Data_Mem[A >> 3];   // divide by 8 (64-bit words)
+    ReadData = Data_Mem[A[63:3]];   // word-aligned access (A >> 3)
   end
 
+  // --------------------------------------------------
   // Synchronous write
+  // --------------------------------------------------
   always @(posedge clk) begin
-    if (rst) begin
-      for (i = 0; i < 1000; i = i + 1)
-        Data_Mem[i] <= 64'd0;
-    end
-    else if (WE) begin
-      Data_Mem[A >> 3] <= WD;
+    if (WE) begin
+      Data_Mem[A[63:3]] <= WD;
     end
   end
 

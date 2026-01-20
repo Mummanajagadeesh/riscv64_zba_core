@@ -23,7 +23,7 @@ module risc_top (
   wire [1:0]  ResultSrcE;
 
   wire [2:0]  Imm_SrcD;
-  wire [3:0]  ALUControlD;   // ✅ FIXED: 4 bits for Zba
+  wire [3:0]  ALUControlD;  
   wire [2:0]  funct3;
 
   wire [6:0]  OP;
