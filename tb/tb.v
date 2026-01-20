@@ -36,10 +36,30 @@ module risc_TB;
   end
 
   // -----------------------------
+  // Instruction memory sanity
+  // -----------------------------
+  initial begin
+    @(negedge rst);
+    $display("INFO: Instruction memory initialized");
+  end
+
+  // -----------------------------
+  // DATA MEMORY MONITOR (REQUIRED)
+  // -----------------------------
+  always @(posedge clk) begin
+    if (CPU.DP.MemWriteM) begin
+      $display("MEM WRITE | time=%0t | addr=%0d | data=%0d",
+               $time,
+               CPU.DP.ALUResultM[63:3],
+               CPU.DP.WriteDataM);
+    end
+  end
+
+  // -----------------------------
   // Self-checking logic
   // -----------------------------
   initial begin
-    // Let program execute fully
+    // Allow program to complete
     repeat (200) @(posedge clk);
 
     $display("");
@@ -47,8 +67,8 @@ module risc_TB;
     $display("     ZBA SELF CHECK START");
     $display("==================================");
 
-    check_reg(1, 64'd5);   // x1 = 5
-    check_reg(2, 64'd3);   // x2 = 3
+    check_reg(1, 64'd5);   // addi
+    check_reg(2, 64'd3);   // addi
     check_reg(3, 64'd11);  // sh1add
     check_reg(4, 64'd17);  // sh2add
     check_reg(5, 64'd29);  // sh3add
@@ -74,11 +94,11 @@ module risc_TB;
     begin
       actual = CPU.DP.regf.Registers[regnum];
       if (actual !== expected) begin
-        $display("ERROR: x%0d = %0d (expected %0d)",
+        $display("FAIL: x%0d = %0d (expected %0d)",
                  regnum, actual, expected);
         $fatal;
       end else begin
-        $display("OK: x%0d = %0d", regnum, actual);
+        $display("PASS: x%0d = %0d", regnum, actual);
       end
     end
   endtask
