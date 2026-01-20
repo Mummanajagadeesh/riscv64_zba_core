@@ -1,7 +1,14 @@
-long x1 = 5;
-long x2 = 3;
+__attribute__((naked))
+void _start() {
+    asm volatile(
+        "li x1, 5\n"
+        "li x2, 3\n"
 
-long x3 = __builtin_riscv_sh1add(x1, x2);
-long x4 = __builtin_riscv_sh2add(x1, x2);
-long x5 = __builtin_riscv_sh3add(x1, x2);
-long x6 = __builtin_riscv_adduw(x1, x2);
+        ".insn r 0x33, 0x2, 0x04, x3, x1, x2\n"
+        ".insn r 0x33, 0x4, 0x04, x4, x1, x2\n"
+        ".insn r 0x33, 0x6, 0x04, x5, x1, x2\n"
+        ".insn r 0x33, 0x0, 0x04, x6, x1, x2\n"
+
+        "1: j 1b\n"
+    );
+}
