@@ -5,21 +5,26 @@
 // Repository : Mummanajagadeesh /riscv64_zba_core
 //
 // Description:
-// This module implements the top-level testbench for the processor core.
-// It provides clock and reset generation, waveform dumping, runtime
-// monitoring, and self-checking assertions to validate correct execution.
+// This module implements a self-checking SystemVerilog testbench for the
+// RV64I processor core with Zba extension support. It drives clock and reset
+// signals, initializes instruction execution, monitors memory activity, and
+// validates architectural state after program completion.
+//
+// The testbench is designed to verify correct functionality across arithmetic,
+// Zba-specific operations, memory accesses, and control-flow behavior.
 //
 // Key Features:
 // - Clock and reset generation
-// - DUT instantiation
-// - Waveform dumping for debugging
-// - Runtime memory write monitoring
+// - Top-level DUT instantiation
+// - Instruction memory initialization check
+// - Data memory write monitoring
 // - Self-checking register assertions
+// - Automatic simulation termination on failure or success
 //
 // Assumptions & Notes:
-// - Instruction and data memories are pre-initialized from external files
-// - Tests complete within a bounded number of cycles
-// - Testbench halts simulation on any assertion failure
+// - Instruction and data memories are preloaded from external files
+// - Program execution completes within a bounded number of cycles
+// - Internal register file visibility is permitted for verification
 //------------------------------------------------------------------------------
 
 
@@ -35,7 +40,7 @@ module risc_TB;
   // --------------------------------------------------
   // Device Under Test (DUT)
   // --------------------------------------------------
-  // Instantiates the top-level processor core
+  // Instantiates the top-level RISC-V processor core
   risc_top CPU (
       .rst(rst),
       .clk(clk)
@@ -44,14 +49,14 @@ module risc_TB;
   // --------------------------------------------------
   // Clock generation
   // --------------------------------------------------
-  // Generates a periodic clock with 20ns period
+  // Generates a free-running clock with a 20ns period
   always #10 clk = ~clk;
 
   // --------------------------------------------------
   // Reset sequence
   // --------------------------------------------------
-  // Applies reset at the start of simulation to
-  // initialize the processor to a known state
+  // Applies an initial reset to place the processor
+  // into a known architectural state before execution
   initial begin
     clk = 1'b0;
     rst = 1'b1;
@@ -62,8 +67,8 @@ module risc_TB;
   // --------------------------------------------------
   // Waveform dump
   // --------------------------------------------------
-  // Enables waveform generation for post-simulation
-  // analysis and debugging
+  // Enables waveform capture for post-simulation
+  // debug and timing analysis
   initial begin
     $dumpfile("risc.vcd");
     $dumpvars(0, risc_TB);
@@ -72,7 +77,8 @@ module risc_TB;
   // --------------------------------------------------
   // Instruction memory sanity check
   // --------------------------------------------------
-  // Confirms instruction memory initialization
+  // Confirms that instruction memory has been
+  // successfully initialized before execution
   initial begin
     @(negedge rst);
     $display("INFO: Instruction memory initialized");
@@ -81,8 +87,8 @@ module risc_TB;
   // --------------------------------------------------
   // Data memory write monitor
   // --------------------------------------------------
-  // Prints memory write transactions for visibility
-  // during simulation
+  // Logs all store operations performed by the core
+  // to aid in observing memory-side effects
   always @(posedge clk) begin
     if (CPU.DP.MemWriteM) begin
       $display("MEM WRITE | time=%0t | addr=%0d | data=%0d",
@@ -93,28 +99,28 @@ module risc_TB;
   end
 
   // --------------------------------------------------
-  // Self-checking test sequence
+  // Self-checking verification sequence
   // --------------------------------------------------
   // Waits for program execution to complete and
-  // validates register contents
+  // validates final architectural register state
   initial begin
     repeat (200) @(posedge clk);
 
     $display("");
     $display("==================================");
-    $display("     ZBA SELF CHECK START");
+    $display("     ZBA + MEMORY SELF CHECK");
     $display("==================================");
 
-    check_reg(1, 64'd5);
-    check_reg(2, 64'd3);
-    check_reg(3, 64'd11);
-    check_reg(4, 64'd17);
-    check_reg(5, 64'd29);
-    check_reg(6, 64'd8);
-    check_reg(7, 64'd0);
+    check_reg(1, 64'd5);   // Immediate load
+    check_reg(2, 64'd3);   // Immediate load
+    check_reg(3, 64'd11);  // SH1ADD
+    check_reg(4, 64'd17);  // SH2ADD
+    check_reg(5, 64'd29);  // SH3ADD
+    check_reg(6, 64'd8);   // ADD.UW
+    check_reg(7, 64'd29);  // Load followed by taken branch
 
     $display("==================================");
-    $display("     ALL ZBA TESTS PASSED");
+    $display("     ALL TESTS PASSED");
     $display("==================================");
     $display("");
 
@@ -124,8 +130,8 @@ module risc_TB;
   // --------------------------------------------------
   // Register assertion task
   // --------------------------------------------------
-  // Compares expected and actual register values
-  // and terminates simulation on mismatch
+  // Compares the expected and actual contents of
+  // a register and terminates simulation on mismatch
   task check_reg(
     input int regnum,
     input [63:0] expected
@@ -149,8 +155,10 @@ endmodule
 
 //------------------------------------------------------------------------------
 // Functional Summary:
-// This self-checking testbench validates correct processor functionality by
-// executing a predefined program and asserting expected architectural state.
-// It provides observability through waveform dumps and runtime logging while
-// ensuring simulation halts on any functional discrepancy.
+// This testbench validates end-to-end processor functionality by executing a
+// representative program and checking final architectural state. It combines
+// runtime observability with automated assertions to ensure correctness across
+// arithmetic operations, Zba extensions, memory accesses, and control-flow
+// handling. The testbench is suitable for regression testing and design
+// verification of the pipelined core.
 //------------------------------------------------------------------------------

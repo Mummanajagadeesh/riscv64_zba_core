@@ -225,21 +225,26 @@ module datapath (
   // --------------------------------------------------
   // Execute stage
   // --------------------------------------------------
-  mux_SrcAE muxa (
-      .RD1E(RD1E),
-      .ResultW(ResultW),
-      .ALUResultM(ALUResultM),
-      .ForwardAE(ForwardAE),
-      .SrcAE(SrcAE)
-  );
+    mux_SrcAE muxa (
+        .RD1E(RD1E),
+        .ResultW(ResultW),
+        .ALUResultM(ALUResultM),
+        .ReadDataM(ReadData),        
+        .ForwardAE(ForwardAE),
+        .MemToRegM(ResultSrcM[0]),  
+        .SrcAE(SrcAE)
+    );
 
-  mux_SrcBE1 muxb1 (
-      .RD2E(RD2E),
-      .ResultW(ResultW),
-      .ALUResultM(ALUResultM),
-      .ForwardBE(ForwardBE),
-      .WriteDataE(WriteDataE)
-  );
+    mux_SrcBE1 muxb1 (
+        .RD2E(RD2E),
+        .ResultW(ResultW),
+        .ALUResultM(ALUResultM),
+        .ReadDataM(ReadData),        
+        .ForwardBE(ForwardBE),
+        .MemToRegM(ResultSrcM[0]),  
+        .WriteDataE(WriteDataE)
+    );
+
 
   mux_SrcBE2 muxb2 (
       .WriteDataE(WriteDataE),

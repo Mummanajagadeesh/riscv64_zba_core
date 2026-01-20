@@ -16,7 +16,12 @@ li x2, 3
 .insn r 0x33, 0x4, 0x04, x4, x1, x2
 .insn r 0x33, 0x6, 0x04, x5, x1, x2
 .insn r 0x33, 0x0, 0x04, x6, x1, x2
-1: j 1b
+sd x5, 0(x0)
+ld x7, 0(x0)
+beq x7, x5, 1f
+li x7, 0
+1:
+j 1b
 
 # 0 "" 2
  #NO_APP
