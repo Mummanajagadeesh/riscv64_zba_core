@@ -20,7 +20,6 @@ module Controller (
   // Main decoder
   // --------------------------------------------------
   always @(*) begin
-    // defaults
     RegWriteD  = 0;
     MemWriteD  = 0;
     BranchD    = 0;
@@ -48,7 +47,7 @@ module Controller (
         ALUOp      = 2'b01;
       end
 
-      7'b0000011: begin  // Load (LD)
+      7'b0000011: begin  // Load
         RegWriteD  = 1;
         ALUSrcD    = 1;
         Imm_SrcD   = 3'b000;
@@ -56,7 +55,7 @@ module Controller (
         ALUOp      = 2'b10;
       end
 
-      7'b0100011: begin  // Store (SD)
+      7'b0100011: begin  // Store
         RegWriteD  = 0;
         ALUSrcD    = 1;
         Imm_SrcD   = 3'b001;
@@ -97,13 +96,13 @@ module Controller (
       end
 
       default: begin
-        // do nothing
+        // no-op
       end
     endcase
   end
 
   // --------------------------------------------------
-  // ALU decoder (includes Zba)
+  // ALU decoder (RV64I + Zba)
   // --------------------------------------------------
   always @(*) begin
     ALUControlD = 4'b0000; // default ADD
@@ -115,9 +114,10 @@ module Controller (
         if (funct7 == 7'b0000100) begin
           // -------- Zba instructions --------
           case (funct3)
-            3'b000: ALUControlD = 4'b1000; // sh1add
-            3'b001: ALUControlD = 4'b1001; // sh2add
-            3'b010: ALUControlD = 4'b1010; // sh3add
+            3'b010: ALUControlD = 4'b1000; // sh1add
+            3'b100: ALUControlD = 4'b1001; // sh2add
+            3'b110: ALUControlD = 4'b1010; // sh3add
+            3'b000: ALUControlD = 4'b1011; // add.uw
             default: ALUControlD = 4'b0000;
           endcase
         end else begin
@@ -147,7 +147,7 @@ module Controller (
 
       // Load / Store / Branch
       2'b10: begin
-        ALUControlD = 4'b0000; // address add
+        ALUControlD = 4'b0000;
       end
 
       // JALR

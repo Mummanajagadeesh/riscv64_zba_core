@@ -12,7 +12,9 @@ module alu (
   reg [63:0] ALU_Result;
   assign ALUResult = ALU_Result;
 
-  // Branch comparison logic (unchanged semantics)
+  // --------------------------------------------------
+  // Branch comparison logic
+  // --------------------------------------------------
   always @(*) begin
     case (funct3E)
       3'b000:  ZeroE = (SrcAE == SrcBE);                     // beq
@@ -23,7 +25,9 @@ module alu (
     endcase
   end
 
-  // ALU operations
+  // --------------------------------------------------
+  // ALU operations (RV64I + Zba)
+  // --------------------------------------------------
   always @(*) begin
     case (ALUControlE)
 
@@ -34,12 +38,12 @@ module alu (
       4'b0100: ALU_Result = ($signed(SrcAE) < $signed(SrcBE)) ? 64'd1 : 64'd0; // SLT
       4'b0101: ALU_Result = SrcAE ^ SrcBE;                   // XOR
 
-      // ================= Zba EXTENSION =================
+      // ---------------- Zba EXTENSION ----------------
       4'b1000: ALU_Result = SrcAE + (SrcBE << 1);            // sh1add
       4'b1001: ALU_Result = SrcAE + (SrcBE << 2);            // sh2add
       4'b1010: ALU_Result = SrcAE + (SrcBE << 3);            // sh3add
-      4'b1011: ALU_Result = {32'b0, SrcAE[31:0]} + SrcBE;    // add.uw
-      // =================================================
+      4'b1011: ALU_Result = SrcAE + {32'b0, SrcBE[31:0]};    // add.uw
+      // ------------------------------------------------
 
       default: ALU_Result = SrcAE + SrcBE;
     endcase

@@ -159,7 +159,6 @@ module datapath (
       .JumpD(JumpD),
       .BranchD(BranchD),
       .ALUSrcD(ALUSrcD),
-      .ZeroE(ZeroE),
       .FlushE(FlushE),
       .ResultSrcD(ResultSrcD),
       .ALUControlD(ALUControlD),
@@ -170,7 +169,6 @@ module datapath (
       .JumpE(JumpE),
       .BranchE(BranchE),
       .ALUSrcE(ALUSrcE),
-      .PCSrcE(PCSrcE),
       .ResultSrcE(ResultSrcE),
       .ALUControlE(ALUControlE),
       .PCE(PCE),
@@ -219,6 +217,13 @@ module datapath (
       .ALUResult(ALUResult),
       .ZeroE(ZeroE)
   );
+
+  // --------- CORRECT PCSrcE COMPUTATION (EX stage) ---------
+  assign PCSrcE =
+      (BranchE && ZeroE) ? 2'b01 :
+      (JumpE && (OPE == 7'b1101111)) ? 2'b01 :
+      (JumpE && (OPE == 7'b1100111)) ? 2'b10 :
+      2'b00;
 
   PCTarget_adder pcimmadd (
       .PCE(PCE),
