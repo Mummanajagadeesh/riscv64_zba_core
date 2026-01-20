@@ -66,7 +66,7 @@ module datapath (
   wire [4:0]  A3;
 
   // --------------------------------------------------
-  // PCSrcE REGISTER (THIS IS THE FIX)
+  // PCSrcE REGISTER
   // --------------------------------------------------
   reg [1:0] PCSrcE_r;
 
@@ -128,7 +128,7 @@ module datapath (
   );
 
   // --------------------------------------------------
-  // PC logic (USE REGISTERED PCSrcE)
+  // PC 
   // --------------------------------------------------
   Adress_Generator pcgen (
       .rst(rst),

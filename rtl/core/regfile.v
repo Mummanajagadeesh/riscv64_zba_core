@@ -15,7 +15,7 @@ module Register_File (
   integer i;
 
   // --------------------------------------------------
-  // READ PORTS WITH WRITE-BYPASS (CRITICAL FIX)
+  // READ PORTS WITH WRITE-BYPASS
   // --------------------------------------------------
   always @(*) begin
     // RD1

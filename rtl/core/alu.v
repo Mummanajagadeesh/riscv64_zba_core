@@ -3,9 +3,9 @@
 module alu (
     input  [63:0] SrcAE,
     input  [63:0] SrcBE,          // RV64 operands
-    input  [3:0]  ALUControlE,    // extended ALU control
+    input  [3:0]  ALUControlE,    
     input  [2:0]  funct3E,
-    input         BranchE,        // <<< NEW
+    input         BranchE,        
     output [63:0] ALUResult,
     output reg    ZeroE
 );
@@ -14,7 +14,7 @@ module alu (
   assign ALUResult = ALU_Result;
 
   // --------------------------------------------------
-  // Branch comparison logic (VALID ONLY FOR BRANCH)
+  // Branch comparison logic
   // --------------------------------------------------
   always @(*) begin
     if (!BranchE) begin

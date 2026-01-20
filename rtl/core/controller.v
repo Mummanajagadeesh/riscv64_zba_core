@@ -9,7 +9,7 @@ module Controller (
     output reg        JumpD,
     output reg        BranchD,
     output reg [1:0]  ResultSrcD,
-    output reg [3:0]  ALUControlD,   // widened for Zba
+    output reg [3:0]  ALUControlD,   
     output reg [2:0]  Imm_SrcD,
     output reg        WD3_SrcD
 );
