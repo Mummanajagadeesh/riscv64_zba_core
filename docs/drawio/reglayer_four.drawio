@@ -1,0 +1,220 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="MEM_WB_Register">
+    <mxGraphModel dx="1200" dy="780" grid="1" gridSize="10"
+      guides="1" tooltips="1" connect="1"
+      arrows="1" fold="1" page="1"
+      pageScale="1" pageWidth="1100" pageHeight="850">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ================= OUTER BOX ================= -->
+        <mxCell id="memwb" value=""
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="360" y="180" width="520" height="420" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= LABEL BELOW ================= -->
+        <mxCell id="memwb_label" value="MEM / WB Pipeline Register"
+          style="html=1;align=center;fontStyle=1;fontSize=14;"
+          vertex="1" parent="1">
+          <mxGeometry x="360" y="620" width="520" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= INTERNAL BLOCK ================= -->
+        <mxCell id="memwb_logic"
+          value="Pipeline Register Logic&#xa;• Latch on clk↑&#xa;• Reset clears all fields"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;"
+          vertex="1" parent="1">
+          <mxGeometry x="390" y="230" width="460" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= INPUTS (LEFT) ================= -->
+
+        <mxCell id="ALUResultM" value="ALUResultM[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="240" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ReadData" value="ReadData[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="280" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="PCPlus4M" value="PCPlus4M[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="320" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ExtImmM" value="ExtImmM[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="360" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="RdM" value="RdM[4:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="400" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ResultSrcM" value="ResultSrcM[1:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="440" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="RegWriteM" value="RegWriteM"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="480" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="clk" value="clk"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="520" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="rst" value="rst"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="560" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= OUTPUTS (RIGHT) ================= -->
+
+        <mxCell id="ALUResultW" value="ALUResultW[63:0]"
+          style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="920" y="260" width="220" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ReadDataW" value="ReadDataW[63:0]"
+          style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="920" y="300" width="220" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="PCPlus4W" value="PCPlus4W[63:0]"
+          style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="920" y="340" width="220" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ExtImmW" value="ExtImmW[63:0]"
+          style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="920" y="380" width="220" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="RdW" value="RdW[4:0]"
+          style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="920" y="420" width="220" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ResultSrcW" value="ResultSrcW[1:0]"
+          style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="920" y="460" width="220" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="RegWriteW" value="RegWriteW"
+          style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="920" y="500" width="220" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= EDGES (ORTHOGONAL, STRAIGHT) ================= -->
+
+        <!-- inputs -->
+        <mxCell edge="1" parent="1" source="ALUResultM" target="memwb"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.15;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="ReadData" target="memwb"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.25;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="PCPlus4M" target="memwb"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.35;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="ExtImmM" target="memwb"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.45;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="RdM" target="memwb"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.55;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="ResultSrcM" target="memwb"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.65;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="RegWriteM" target="memwb"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.75;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="clk" target="memwb"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.85;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="rst" target="memwb"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.95;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- outputs -->
+        <mxCell edge="1" parent="1" source="memwb" target="ALUResultW"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.2;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="memwb" target="ReadDataW"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.3;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="memwb" target="PCPlus4W"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.4;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="memwb" target="ExtImmW"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="memwb" target="RdW"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.6;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="memwb" target="ResultSrcW"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.7;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="memwb" target="RegWriteW"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.8;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

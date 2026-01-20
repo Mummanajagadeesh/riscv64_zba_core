@@ -1,0 +1,64 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
+  <diagram name="PC_Register" id="nZhq9AsXZiYLHWxvV-T9">
+    <mxGraphModel dx="1414" dy="913" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pc" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="420" y="220" width="360" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="pc_label" value="Program Counter (PC Register)" style="html=1;align=center;fontStyle=1;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="420" y="460" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="pc_logic" value="PC Register Logic&#xa;Reset → PC = 0&#xa;Stall → Hold PC&#xa;Else → PC = PCnext" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="450" y="260" width="300" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="rst" value="rst" style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="150" y="240" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="clk" value="clk" style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="150" y="280" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="StallF" value="StallF" style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="150" y="320" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PCnext" value="PCnext[63:0]" style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="150" y="360" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PCF" value="PCF[63:0]" style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="830" y="320" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2" style="edgeStyle=orthogonalEdgeStyle;                  exitX=1;exitY=0.5;                  entryX=0;entryY=0.25;" parent="1" source="rst" target="pc" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="375" y="255" />
+              <mxPoint x="375" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3" style="edgeStyle=orthogonalEdgeStyle;                  exitX=1;exitY=0.5;                  entryX=0;entryY=0.4;" parent="1" source="clk" target="pc" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="375" y="295" />
+              <mxPoint x="375" y="310" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4" style="edgeStyle=orthogonalEdgeStyle;                  exitX=1;exitY=0.5;                  entryX=0;entryY=0.55;" parent="1" source="StallF" target="pc" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5" style="edgeStyle=orthogonalEdgeStyle;                  exitX=1;exitY=0.5;                  entryX=0;entryY=0.75;" parent="1" source="PCnext" target="pc" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="375" y="375" />
+              <mxPoint x="375" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6" style="edgeStyle=orthogonalEdgeStyle;                  exitX=1;exitY=0.5;                  entryX=0;entryY=0.5;" parent="1" source="pc" target="PCF" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,119 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="mux_SrcBE1">
+    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10"
+      guides="1" tooltips="1" connect="1"
+      arrows="1" fold="1" page="1"
+      pageScale="1" pageWidth="1100" pageHeight="850">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ================= OUTER BOX ================= -->
+        <mxCell id="muxB" value=""
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="420" y="200" width="360" height="260" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= LABEL BELOW ================= -->
+        <mxCell id="muxB_label" value="Forwarding MUX – SrcBE / WriteDataE"
+          style="html=1;align=center;fontStyle=1;fontSize=14;"
+          vertex="1" parent="1">
+          <mxGeometry x="420" y="480" width="360" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= INTERNAL BLOCK ================= -->
+        <mxCell id="mux_logic"
+          value="WriteDataE Selection Logic&#xa;00: RD2E&#xa;01: ResultW&#xa;10: MEM (Load/ALU)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;"
+          vertex="1" parent="1">
+          <mxGeometry x="450" y="240" width="300" height="140" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= INPUTS (LEFT) ================= -->
+
+        <mxCell id="RD2E" value="RD2E[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="150" y="230" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ResultW" value="ResultW[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="150" y="270" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ALUResultM" value="ALUResultM[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="150" y="310" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ReadDataM" value="ReadDataM[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="150" y="350" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ForwardBE" value="ForwardBE[1:0]"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="150" y="390" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="MemToRegM" value="MemToRegM"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="150" y="430" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= OUTPUT (RIGHT) ================= -->
+
+        <mxCell id="WriteDataE" value="WriteDataE[63:0]"
+          style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="830" y="310" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= EDGES (ORTHOGONAL, STRAIGHT) ================= -->
+
+        <mxCell edge="1" parent="1" source="RD2E" target="muxB"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.25;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="ResultW" target="muxB"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.4;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="ALUResultM" target="muxB"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.55;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="ReadDataM" target="muxB"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.7;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="ForwardBE" target="muxB"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.85;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="MemToRegM" target="muxB"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.95;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="muxB" target="WriteDataE"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

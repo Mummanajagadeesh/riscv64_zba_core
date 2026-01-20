@@ -1,0 +1,106 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="DataMem">
+    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10"
+      guides="1" tooltips="1" connect="1"
+      arrows="1" fold="1" page="1"
+      pageScale="1" pageWidth="1100" pageHeight="850">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ================= DATA MEMORY OUTER BOX ================= -->
+        <mxCell id="dmem" value=""
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="420" y="200" width="380" height="260" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= LABEL BELOW ================= -->
+        <mxCell id="dmem_label" value="Data Memory"
+          style="html=1;align=center;fontStyle=1;fontSize=14;"
+          vertex="1" parent="1">
+          <mxGeometry x="420" y="480" width="380" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= INTERNAL BLOCK ================= -->
+        <mxCell id="mem_array" value="64-bit Memory Array&#xa;Word Addressed&#xa;Index = A[63:3]"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;"
+          vertex="1" parent="1">
+          <mxGeometry x="450" y="240" width="320" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= INPUTS (LEFT) ================= -->
+        <mxCell id="WD" value="WD[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="140" y="240" width="170" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="A" value="A[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="140" y="290" width="170" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="clk" value="clk"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="140" y="340" width="170" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="WE" value="WE"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="140" y="390" width="170" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="rst" value="rst"
+          style="rounded=1;align=right;fillColor=#eeeeee;strokeColor=#999999;"
+          vertex="1" parent="1">
+          <mxGeometry x="140" y="440" width="170" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= OUTPUT (RIGHT) ================= -->
+        <mxCell id="ReadData" value="ReadData[63:0]"
+          style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="850" y="300" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= EDGES ================= -->
+        <!-- inputs -->
+        <mxCell edge="1" parent="1" source="WD" target="dmem"
+          style="edgeStyle=orthogonalEdgeStyle;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="A" target="dmem"
+          style="edgeStyle=orthogonalEdgeStyle;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="clk" target="dmem"
+          style="edgeStyle=orthogonalEdgeStyle;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="WE" target="dmem"
+          style="edgeStyle=orthogonalEdgeStyle;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="rst" target="dmem"
+          style="edgeStyle=orthogonalEdgeStyle;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- output -->
+        <mxCell edge="1" parent="1" source="dmem" target="ReadData"
+          style="edgeStyle=orthogonalEdgeStyle;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

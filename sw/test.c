@@ -14,7 +14,7 @@ void _start() {
         "ld x7, 0(x0)\n"        // x7 <- mem[0]
 
         "beq x7, x5, 1f\n"
-        "li x7, 0\n"            // must NOT execute
+        "li x7, 0\n"            
 
         "1:\n"
         "j 1b\n"

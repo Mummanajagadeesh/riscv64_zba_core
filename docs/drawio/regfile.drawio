@@ -1,0 +1,141 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Register_File">
+    <mxGraphModel dx="1200" dy="760" grid="1" gridSize="10"
+      guides="1" tooltips="1" connect="1"
+      arrows="1" fold="1" page="1"
+      pageScale="1" pageWidth="1100" pageHeight="850">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ================= OUTER BOX ================= -->
+        <mxCell id="regfile" value=""
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="380" y="200" width="440" height="340" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= LABEL BELOW ================= -->
+        <mxCell id="regfile_label" value="Register File (32 × 64-bit)"
+          style="html=1;align=center;fontStyle=1;fontSize=14;"
+          vertex="1" parent="1">
+          <mxGeometry x="380" y="560" width="440" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= INTERNAL BLOCK ================= -->
+        <mxCell id="regfile_logic"
+          value="Register Array&#xa;• 2 Read Ports (Async)&#xa;• 1 Write Port (Sync)&#xa;• Write-Bypass&#xa;• x0 = 0"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;"
+          vertex="1" parent="1">
+          <mxGeometry x="410" y="240" width="380" height="180" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= INPUTS (LEFT) ================= -->
+
+        <mxCell id="A1" value="A1[4:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="230" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="A2" value="A2[4:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="270" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="A3" value="A3[4:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="310" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="WD3" value="WD3[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="350" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="clk" value="clk"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="390" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="WE3" value="WE3"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="430" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="rst" value="rst"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="470" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= OUTPUTS (RIGHT) ================= -->
+
+        <mxCell id="RD1" value="RD1[63:0]"
+          style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="860" y="300" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="RD2" value="RD2[63:0]"
+          style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="860" y="350" width="200" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= EDGES (ORTHOGONAL, STRAIGHT) ================= -->
+
+        <mxCell edge="1" parent="1" source="A1" target="regfile"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.2;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="A2" target="regfile"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.3;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="A3" target="regfile"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.45;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="WD3" target="regfile"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.6;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="clk" target="regfile"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.75;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="WE3" target="regfile"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.85;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="rst" target="regfile"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;entryX=0;entryY=0.95;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="regfile" target="RD1"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.45;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell edge="1" parent="1" source="regfile" target="RD2"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.6;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

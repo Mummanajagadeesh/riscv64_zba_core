@@ -1,0 +1,109 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
+  <diagram name="Datapath_Composite" id="0">
+    <mxGraphModel dx="1664" dy="1074" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="datapath_top" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="80" width="1300" height="720" as="geometry" />
+        </mxCell>
+        <mxCell id="IF" value="IF Stage&#xa;• PC&#xa;• Instr Mem" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="120" y="160" width="180" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="ID" value="ID Stage&#xa;• Decode&#xa;• RegFile&#xa;• SignExt" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="320" y="130" width="220" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="EX" value="EX Stage&#xa;• ALU&#xa;• Forwarding&#xa;• Branch" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="570" y="130" width="220" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="MEM" value="MEM Stage&#xa;• Data Mem" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="850" y="160" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="WB" value="WB Stage&#xa;• Result MUX" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="850" y="420" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="clk" value="clk" style="rounded=1;align=right;" parent="1" vertex="1">
+          <mxGeometry x="20" y="120" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rst" value="rst" style="rounded=1;align=right;" parent="1" vertex="1">
+          <mxGeometry x="20" y="160" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="controls" value="Control Inputs&#xa;JumpD, BranchD&#xa;MemWriteD, ALUSrcD&#xa;RegWriteD, WD3_SrcD&#xa;ResultSrcD, Imm_SrcD&#xa;ALUControlD" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="860" y="600" width="180" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="hazard_ctrl" value="Hazard / Forwarding&#xa;StallF, StallD&#xa;FlushD, FlushE&#xa;ForwardAE, ForwardBE" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="120" y="610" width="180" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="outputs" value="Outputs&#xa;OP, funct3, funct7&#xa;A1, A2&#xa;RdE, RdM, RdW&#xa;Rs1E, Rs2E&#xa;PCSrcE, ResultSrcE&#xa;RegWriteM, RegWriteW" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="1130" y="260" width="180" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-1" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="clk" target="IF" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-2" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="rst" target="IF" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-3" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="IF" target="ID" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-4" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="ID" target="EX" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-5" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="EX" target="MEM" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-6" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="MEM" target="WB" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-7" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="controls" target="ID" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-8" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="hazard_ctrl" target="IF" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-9" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="hazard_ctrl" target="ID" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-10" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="hazard_ctrl" target="EX" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-11" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="ID" target="outputs" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="470" y="490" />
+              <mxPoint x="810" y="490" />
+              <mxPoint x="810" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-12" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="EX" target="outputs" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="300" />
+              <mxPoint x="830" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-13" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="MEM" target="outputs" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1090" y="260" />
+              <mxPoint x="1090" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="sjPFS_F9tGF47jFC2ZDc-14" style="edgeStyle=orthogonalEdgeStyle;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="WB" target="outputs" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

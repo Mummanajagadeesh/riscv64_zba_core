@@ -1,0 +1,106 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
+  <diagram name="Controller" id="2rAMvnOlFW8gvxWKTFxV">
+    <mxGraphModel dx="1414" dy="913" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ctrl" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="400" y="180" width="420" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="ctrl_label" value="Controller" style="html=1;align=center;fontStyle=1;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="400" y="560" width="420" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="main_dec" value="Main Decoder&#xa;Opcode → Control + ALUOp" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="430" y="210" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="alu_dec" value="ALU Decoder&#xa;ALUOp + funct3/funct7" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="430" y="350" width="360" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="OP" value="OP[6:0]" style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="120" y="240" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="funct7" value="funct7[6:0]" style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="120" y="290" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="funct3" value="funct3[2:0]" style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="120" y="340" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="RegWriteD" value="RegWriteD" style="rounded=1;align=left;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="860" y="200" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MemWriteD" value="MemWriteD" style="rounded=1;align=left;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="860" y="240" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ALUSrcD" value="ALUSrcD" style="rounded=1;align=left;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="860" y="280" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="BranchD" value="BranchD" style="rounded=1;align=left;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="860" y="320" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JumpD" value="JumpD" style="rounded=1;align=left;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="860" y="360" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ResultSrcD" value="ResultSrcD[1:0]" style="rounded=1;align=left;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="860" y="400" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ImmSrcD" value="Imm_SrcD[2:0]" style="rounded=1;align=left;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="860" y="440" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WD3SrcD" value="WD3_SrcD" style="rounded=1;align=left;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="860" y="480" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ALUControlD" value="ALUControlD[3:0]" style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="860" y="520" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="OP" target="main_dec" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="funct7" target="alu_dec" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="305" />
+              <mxPoint x="390" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="funct3" target="alu_dec" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="main_dec" target="alu_dec" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="ctrl" target="RegWriteD" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="ctrl" target="MemWriteD" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="ctrl" target="ALUSrcD" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="ctrl" target="BranchD" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="ctrl" target="JumpD" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="ctrl" target="ResultSrcD" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="ctrl" target="ImmSrcD" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="ctrl" target="WD3SrcD" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="alu_dec" target="ALUControlD" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="610" y="535" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

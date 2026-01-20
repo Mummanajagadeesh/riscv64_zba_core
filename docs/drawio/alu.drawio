@@ -1,0 +1,121 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ALU">
+    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10"
+      guides="1" tooltips="1" connect="1"
+      arrows="1" fold="1" page="1"
+      pageScale="1" pageWidth="1100" pageHeight="850">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ================= ALU OUTER BOX ================= -->
+        <mxCell id="alu" value=""
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="400" y="200" width="400" height="300" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= ALU LABEL (OUTSIDE, BELOW) ================= -->
+        <mxCell id="alu_label" value="ALU"
+          style="html=1;align=center;fontStyle=1;fontSize=14;"
+          vertex="1" parent="1">
+          <mxGeometry x="400" y="520" width="400" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= INTERNAL LABELS ================= -->
+        <mxCell id="aluops" value="ALU Operations&#xa;ADD / SUB / AND / OR / XOR&#xa;SLT&#xa;Zba: SHxADD / ADD.UW"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;"
+          vertex="1" parent="1">
+          <mxGeometry x="440" y="240" width="320" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="branchcmp" value="Branch Compare&#xa;BEQ / BNE / BLT / BGE"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="440" y="370" width="320" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= INPUT BOXES ================= -->
+        <mxCell id="SrcAE" value="SrcAE[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="260" width="160" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="SrcBE" value="SrcBE[63:0]"
+          style="rounded=1;align=right;fillColor=#f8cecc;strokeColor=#b85450;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="300" width="160" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ALUCtrl" value="ALUControlE[3:0]"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="340" width="160" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="funct3" value="funct3E[2:0]"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="380" width="160" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="BranchE" value="BranchE"
+          style="rounded=1;align=right;fillColor=#d5e8d4;strokeColor=#82b366;"
+          vertex="1" parent="1">
+          <mxGeometry x="120" y="420" width="160" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= OUTPUT BOXES ================= -->
+        <mxCell id="ALUResult" value="ALUResult[63:0]"
+          style="rounded=1;align=left;fillColor=#dae8fc;strokeColor=#6c8ebf;"
+          vertex="1" parent="1">
+          <mxGeometry x="860" y="300" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ZeroE" value="ZeroE"
+          style="rounded=1;align=left;fillColor=#fff2cc;strokeColor=#d6b656;"
+          vertex="1" parent="1">
+          <mxGeometry x="860" y="350" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ================= EDGES (ALL RESTORED) ================= -->
+        <mxCell id="e1" edge="1" parent="1" source="SrcAE" target="alu"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.3;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e2" edge="1" parent="1" source="SrcBE" target="alu"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.4;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e3" edge="1" parent="1" source="ALUCtrl" target="alu"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e4" edge="1" parent="1" source="funct3" target="alu"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.6;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e5" edge="1" parent="1" source="BranchE" target="alu"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.7;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e6" edge="1" parent="1" source="alu" target="ALUResult"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.4;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e7" edge="1" parent="1" source="alu" target="ZeroE"
+          style="edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.6;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

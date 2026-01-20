@@ -1,0 +1,81 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
+  <diagram name="RISC_TOP_Composite" id="0">
+    <mxGraphModel dx="1664" dy="1074" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1300" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="top" value="risc_top" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="80" width="1120" height="720" as="geometry" />
+        </mxCell>
+        <mxCell id="datapath" value="Datapath" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="140" y="160" width="420" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="controller" value="Controller" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="620" y="160" width="260" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="hazard" value="Hazard Unit" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="920" y="160" width="240" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="clk" value="clk" style="rounded=1;align=right;" parent="1" vertex="1">
+          <mxGeometry x="30" y="80" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rst" value="rst" style="rounded=1;align=right;" parent="1" vertex="1">
+          <mxGeometry x="30" y="110" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="OP" value="OP[6:0]" parent="1" vertex="1">
+          <mxGeometry x="560" y="200" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="funct3" value="funct3[2:0]" parent="1" vertex="1">
+          <mxGeometry x="560" y="230" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="funct7" value="funct7[6:0]" parent="1" vertex="1">
+          <mxGeometry x="560" y="260" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Pd0mPznPvLuYLPlaGM6m-1" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="clk" target="datapath" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="300" y="95" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Pd0mPznPvLuYLPlaGM6m-2" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="clk" target="hazard" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Pd0mPznPvLuYLPlaGM6m-3" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="rst" target="datapath" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Pd0mPznPvLuYLPlaGM6m-4" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="datapath" target="OP" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Pd0mPznPvLuYLPlaGM6m-5" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="datapath" target="funct3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Pd0mPznPvLuYLPlaGM6m-6" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="datapath" target="funct7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Pd0mPznPvLuYLPlaGM6m-7" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="controller" target="datapath" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="590" y="320" />
+              <mxPoint x="590" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Pd0mPznPvLuYLPlaGM6m-8" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="datapath" target="hazard" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="990" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Pd0mPznPvLuYLPlaGM6m-9" style="edgeStyle=orthogonalEdgeStyle;" parent="1" source="hazard" target="datapath" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1040" y="610" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
