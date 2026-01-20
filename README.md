@@ -1,29 +1,27 @@
-# RISC-V RV64I + Zba Core
+# RV64I-Zba Pipelined RISC-V Core
 
-5-stage pipelined RISC-V 64-bit processor implementing:
-- RV64I base integer ISA
-- Zba address generation extension
+This repository contains a synthesizable 64-bit RISC-V processor core implementing<br>
+the **RV64I base integer instruction set** along with the **Zba address generation<br>
+extension**.
 
-Features:
-- Separate instruction & data memory
-- Fully synthesizable SystemVerilog RTL
-- Self-checking testbench
-- C-based test program
+## Overview
+- 5-stage pipelined microarchitecture (IF, ID, EX, MEM, WB)
+- Separate instruction and data memories
+- Supports standard RV64I arithmetic, logical, load/store, and branch instructions
+- Implements Zba instructions: `sh1add`, `sh2add`, `sh3add`, and `add.uw`
+- Designed and implemented in **SystemVerilog**
 
-Pipeline:
-IF → ID → EX → MEM → WB
+## Verification
+- Self-checking SystemVerilog testbench
+- Runtime memory monitoring and register assertions
+- Waveform generation for debug and analysis
 
+## Toolchain & Build
+- Compatible with **RISC-V GNU toolchain**
+- Software-to-hardware flow documented in [`build_commands.md`](build_commands.md)
 
-<!-- 
-```
-riscv64-unknown-elf-as sw/instruction.S -o instruction.o
-riscv64-unknown-elf-objdump -d instruction.o
-``` -->
+## Documentation
+- Design notes and architectural details available at [`docs/design_notes.md`](docs/design_notes.md)
 
-```
-riscv64-unknown-elf-gcc -ffreestanding -nostdlib -nostartfiles -march=rv64i -mabi=lp64 -S sw/test.c -o sw/test.s
-riscv64-unknown-elf-as sw/test.s -o sw/test.o
-riscv64-unknown-elf-ld -T sw/linker.ld --entry=_start sw/test.o -o sw/test.elf
-riscv64-unknown-elf-objdump -d sw/test.elf | awk '/^[ ]*[0-9a-f]+:/ {print $2}' | sed '$d' > instruction.mem
-```
-
+## Status
+All core features verified through simulation with passing self-checking tests.
