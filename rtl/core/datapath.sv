@@ -1,41 +1,67 @@
+//------------------------------------------------------------------------------
+// File Name  : datapath.sv
+// Author     : Jagadeesh Mummana
+// Email      : mummanajagadeesh97@gmail.com
+// Repository : Mummanajagadeesh /riscv64_zba_core
+//
+// Description:
+// This module implements the complete processor datapath, integrating
+// instruction fetch, decode, execute, memory access, and write-back stages.
+// It coordinates pipeline registers, forwarding paths, hazard control,
+// branch and jump handling, and memory interfaces.
+//
+// Key Features:
+// - Five-stage pipelined datapath organization
+// - Full support for data forwarding and stalling
+// - Integrated branch and jump resolution
+// - Clean separation of pipeline stages using register layers
+// - Modular structure for easy extensibility and debugging
+//
+// Assumptions & Notes:
+// - Control signals are generated externally and supplied per stage
+// - Hazard detection and forwarding control logic are implemented outside
+// - All pipeline registers reset to safe states on reset or flush
+//------------------------------------------------------------------------------
+
+
 `timescale 1ns / 1ns
 module datapath (
-    input         rst,
-    input         clk,
-    input         JumpD,
-    input         BranchD,
-    input         MemWriteD,
-    input         ALUSrcD,
-    input         RegWriteD,
-    input         WD3_SrcD,
-    input         StallF,
-    input         StallD,
-    input         FlushD,
-    input         FlushE,
-    input  [1:0]  ResultSrcD,
-    input  [1:0]  ForwardAE,
-    input  [1:0]  ForwardBE,
-    input  [2:0]  Imm_SrcD,
-    input  [3:0]  ALUControlD,
+    input         rst,            // Global reset
+    input         clk,            // Clock
+    input         JumpD,           // Jump control (decode stage)
+    input         BranchD,         // Branch control (decode stage)
+    input         MemWriteD,       // Memory write enable (decode stage)
+    input         ALUSrcD,         // ALU source select (decode stage)
+    input         RegWriteD,       // Register write enable (decode stage)
+    input         WD3_SrcD,        // Write-back source select
+    input         StallF,          // Fetch stage stall
+    input         StallD,          // Decode stage stall
+    input         FlushD,          // Decode stage flush
+    input         FlushE,          // Execute stage flush
+    input  [1:0]  ResultSrcD,      // Result source select (decode stage)
+    input  [1:0]  ForwardAE,       // Forwarding select for SrcA
+    input  [1:0]  ForwardBE,       // Forwarding select for SrcB
+    input  [2:0]  Imm_SrcD,        // Immediate format select
+    input  [3:0]  ALUControlD,     // ALU control (decode stage)
 
-    output [6:0]  OP,
-    output [6:0]  funct7,
-    output [2:0]  funct3,
-    output [4:0]  A1,
-    output [4:0]  A2,
-    output [4:0]  RdE,
-    output [4:0]  RdM,
-    output [4:0]  RdW,
-    output [4:0]  Rs1E,
-    output [4:0]  Rs2E,
-    output [1:0]  PCSrcE,
-    output [1:0]  ResultSrcE,
-    output        RegWriteM,
-    output        RegWriteW
+    output [6:0]  OP,              // Opcode field
+    output [6:0]  funct7,          // funct7 field
+    output [2:0]  funct3,          // funct3 field
+    output [4:0]  A1,              // Source register 1 index
+    output [4:0]  A2,              // Source register 2 index
+    output [4:0]  RdE,             // Destination register (execute)
+    output [4:0]  RdM,             // Destination register (memory)
+    output [4:0]  RdW,             // Destination register (write-back)
+    output [4:0]  Rs1E,            // Source register 1 (execute)
+    output [4:0]  Rs2E,            // Source register 2 (execute)
+    output [1:0]  PCSrcE,           // PC source select (execute)
+    output [1:0]  ResultSrcE,       // Result source select (execute)
+    output        RegWriteM,        // Register write enable (memory)
+    output        RegWriteW         // Register write enable (write-back)
 );
 
   // --------------------------------------------------
-  // Wires
+  // Internal wires
   // --------------------------------------------------
   wire [63:0] RD1, RD2, RD1E, RD2E;
   wire [63:0] SrcAE, SrcBE;
@@ -66,8 +92,9 @@ module datapath (
   wire [4:0]  A3;
 
   // --------------------------------------------------
-  // PCSrcE REGISTER
+  // PCSrcE pipeline register
   // --------------------------------------------------
+  // Ensures PC source selection is stable across pipeline stages
   reg [1:0] PCSrcE_r;
 
   always @(posedge clk) begin
@@ -78,7 +105,7 @@ module datapath (
   end
 
   // --------------------------------------------------
-  // Fetch / Decode
+  // Instruction Fetch / Decode
   // --------------------------------------------------
   Instruction_Memory instmeme (
       .PCF(PCF),
@@ -128,7 +155,7 @@ module datapath (
   );
 
   // --------------------------------------------------
-  // PC 
+  // Program Counter logic
   // --------------------------------------------------
   Adress_Generator pcgen (
       .rst(rst),
@@ -152,7 +179,7 @@ module datapath (
   );
 
   // --------------------------------------------------
-  // ID / EX
+  // ID / EX pipeline stage
   // --------------------------------------------------
   reglayer_two lay2 (
       .PCD(PCD),
@@ -196,7 +223,7 @@ module datapath (
   );
 
   // --------------------------------------------------
-  // Execute
+  // Execute stage
   // --------------------------------------------------
   mux_SrcAE muxa (
       .RD1E(RD1E),
@@ -231,6 +258,7 @@ module datapath (
       .ZeroE(ZeroE)
   );
 
+  // PC source selection logic
   assign PCSrcE =
       (BranchE && ZeroE) ? 2'b01 :
       (JumpE && (OPE == 7'b1101111)) ? 2'b01 :
@@ -244,7 +272,7 @@ module datapath (
   );
 
   // --------------------------------------------------
-  // EX / MEM
+  // EX / MEM pipeline stage
   // --------------------------------------------------
   reglayer_three lay3 (
       .WriteDataE(WriteDataE),
@@ -278,7 +306,7 @@ module datapath (
   );
 
   // --------------------------------------------------
-  // MEM / WB
+  // MEM / WB pipeline stage
   // --------------------------------------------------
   reglayer_four lay4 (
       .ALUResultM(ALUResultM),
@@ -310,3 +338,12 @@ module datapath (
   );
 
 endmodule
+
+
+//------------------------------------------------------------------------------
+// Functional Summary:
+// This datapath module integrates all pipeline stages and supporting logic
+// required for instruction execution. It provides full support for control
+// flow, hazard handling, forwarding, memory access, and write-back operations,
+// forming the structural backbone of the processor core.
+//------------------------------------------------------------------------------

@@ -1,8 +1,35 @@
+//------------------------------------------------------------------------------
+// File Name  : top.sv
+// Author     : Jagadeesh Mummana
+// Email      : mummanajagadeesh97@gmail.com
+// Repository : Mummanajagadeesh /riscv64_zba_core
+//
+// Description:
+// This module is the top-level integration wrapper for the processor core.
+// It instantiates and connects the datapath, control unit, and hazard unit,
+// forming a complete pipelined processor implementation.
+//
+// Key Features:
+// - Top-level integration of datapath and control logic
+// - Clean separation of control, datapath, and hazard handling
+// - Centralized wiring of pipeline control signals
+// - Minimal external interface (clock and reset)
+//
+// Assumptions & Notes:
+// - All submodules are synchronous to the same clock
+// - Reset initializes the entire pipeline to a known safe state
+// - Instruction and data memories are instantiated within the datapath
+//------------------------------------------------------------------------------
+
+
 module risc_top (
-    input rst,
-    input clk
+    input rst,          // Global reset
+    input clk           // Global clock
 );
 
+  // --------------------------------------------------
+  // Control and hazard signals
+  // --------------------------------------------------
   wire        JumpD;
   wire        BranchD;
   wire        MemWriteD;
@@ -40,6 +67,7 @@ module risc_top (
   // -----------------------------------------
   // Datapath
   // -----------------------------------------
+  // Implements the five-stage pipelined datapath
   datapath DP (
       .rst(rst),
       .clk(clk),
@@ -78,6 +106,7 @@ module risc_top (
   // -----------------------------------------
   // Controller
   // -----------------------------------------
+  // Decodes instructions and generates control signals
   Controller CU (
       .OP(OP),
       .funct7(funct7),
@@ -96,6 +125,7 @@ module risc_top (
   // -----------------------------------------
   // Hazard Unit
   // -----------------------------------------
+  // Handles data and control hazard resolution
   hazard_unit HU (
       .clk(clk),
       .Rs1E(Rs1E),
@@ -118,3 +148,12 @@ module risc_top (
   );
 
 endmodule
+
+
+//------------------------------------------------------------------------------
+// Functional Summary:
+// This top-level module integrates the datapath, control unit, and hazard unit
+// to form a complete pipelined processor core. It serves as the primary entry
+// point for simulation and synthesis, exposing only clock and reset as external
+// interfaces while encapsulating all internal processor functionality.
+//------------------------------------------------------------------------------
