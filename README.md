@@ -4,6 +4,12 @@ This repository contains a synthesizable 64-bit RISC-V processor core implementi
 the **RV64I base integer instruction set** along with the **Zba address generation<br>
 extension**.
 
+
+<p align="center">
+  <img src="docs/full.png" alt="block diagram" width="700">
+</p>
+
+
 ## Overview
 - 5-stage pipelined microarchitecture (IF, ID, EX, MEM, WB)
 - Separate instruction and data memories
@@ -23,5 +29,10 @@ extension**.
 ## Documentation
 - Design notes and architectural details available at [`docs/design_notes.md`](docs/design_notes.md)
 
+## Report
+- Full report with relavant explanations can be found here at [`docs/report.md`](docs/report.md)
+
 ## Status
 All core features verified through simulation with passing self-checking tests.
+
+> **Note**: AI tools were used exclusively for documentation writing and structuring. All design, implementation, and verification were performed manually
